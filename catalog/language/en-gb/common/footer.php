@@ -18,15 +18,3 @@ $_['text_order']        = 'Order History';
 $_['text_wishlist']     = 'Wish List';
 $_['text_newsletter']   = 'Newsletter';
 $_['text_powered']      = 'Powered By <a href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s';
-
-/*
-* =================== мои настройки
-*/
-$_['text_contact']  = 'Contacts';
-$_['feedback_menu']  = 'Feedback';
-$_['site_map_menu']  = 'Sitemap';
-$_['payment_menu']  = 'Payment';
-$_['delivery_menu']  = 'Delivery';
-$_['general_terms_menu']  = 'General terms';
-$_['about_menu']  = 'About us';
-

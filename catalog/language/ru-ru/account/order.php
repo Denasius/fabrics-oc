@@ -38,12 +38,3 @@ $_['column_comment']        = 'Комментарий';
 
 // Error
 $_['error_reorder']         = '%s в настоящее время не доступны для заказана.';
-
-/**
- * мои настройки
- */
-$_['text_order_history'] = 'История заказов';
-$_['text_order_wishlist'] = 'Избранное';
-$_['text_order_head'] = 'Заказ';
-$_['text_order_total'] = 'Общая сумма';
-$_['text_order_replace'] = 'Повторить заказ';

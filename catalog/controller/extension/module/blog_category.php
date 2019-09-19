@@ -14,7 +14,7 @@ class ControllerExtensionModuleBlogCategory extends Controller {
 			$parts = array();
 		}
 
-		if (isset($parts)) {
+		if (isset($parts[0])) {
 			$data['blog_category_id'] = $parts[0];
 		} else {
 			$data['blog_category_id'] = 0;
@@ -62,8 +62,6 @@ class ControllerExtensionModuleBlogCategory extends Controller {
 				'href'        => $this->url->link('blog/category', 'blog_category_id=' . $category['blog_category_id'])
 			);
 		}
-
-		$data['production_link'] = $this->url->link('blog/category', 'blog_category_id=78');
 
 		return $this->load->view('extension/module/blog_category', $data);
 	}

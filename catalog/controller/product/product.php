@@ -43,7 +43,6 @@ class ControllerProductProduct extends Controller {
 
 			// Set the last category breadcrumb
 			$category_info = $this->model_catalog_category->getCategory($category_id);
-			
 
 			if ($category_info) {
 				$url = '';
@@ -162,10 +161,6 @@ class ControllerProductProduct extends Controller {
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
-		$data['tax_product'] = $product_info['tax_class_id'];
-		$data['product_unit'] = $product_info['weight_class'];
-		
-
 		if ($product_info) {
 			$url = '';
 
@@ -262,7 +257,6 @@ class ControllerProductProduct extends Controller {
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
-			$data['price_per_sample'] = $product_info['mpn'];
 
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
@@ -314,39 +308,17 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$data['tax'] = false;
 			}
-            $data['discounts'] = array();
+
 			$discounts = $this->model_catalog_product->getProductDiscounts($this->request->get['product_id']);
 
-            $data['text_discount_before'] = $this->language->get('text_discount_before');
-            $data['text_discount_after'] = $this->language->get('text_discount_after');
-            $data['text_weight'] = $product_info['weight_class'];
-            $data['symbol_currency'] = $this->session->data['currency'] == 'EUR' ? '&euro;' : $this->session->data['currency'];
+			$data['discounts'] = array();
 
-            if( $discounts ) {
-                $data['min_quantity'] = $discounts[0]['quantity'];
-                $data['min_price'] = $this->currency->format($this->tax->calculate($discounts[0]['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-                $data['discounts'][] = array(
-                    'before_discount' => '1',
-                    'after_discount' => $discounts[0]['quantity'],
-                    'price' => $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
-                );
-
-                foreach ($discounts as $key => $discount) {
-
-                    $after_discount = '...';
-                    if ( isset($discounts[$key + 1]) ) {
-                        $after_discount = $discounts[$key + 1]['quantity'];
-                    }
-
-                    $data['discounts'][] = array(
-                        'before_discount' => $discount['quantity'],
-                        'after_discount' => $after_discount,
-                        'price' => $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
-                    );
-                }
-            }
-
-
+			foreach ($discounts as $discount) {
+				$data['discounts'][] = array(
+					'quantity' => $discount['quantity'],
+					'price'    => $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'])
+				);
+			}
 
 			$data['options'] = array();
 
@@ -423,7 +395,7 @@ class ControllerProductProduct extends Controller {
 
 			foreach ($results as $result) {
 				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], 292, 180);;
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
 				} else {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
 				}
@@ -464,55 +436,6 @@ class ControllerProductProduct extends Controller {
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
 				);
-			}
-
-			$data['related_products'] = array();
-			$result_related = $this->model_catalog_product->getLatestProducts(12);
-			foreach ($result_related as $result) {
-				if ( $result['product_id'] != $product_info['product_id'] ) {					
-					if ($result['image']) {
-						$image = $this->model_tool_image->resize($result['image'], 292, 180);
-					} else {
-						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_related_height'));
-					}
-	
-					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					} else {
-						$price = false;
-					}
-	
-					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					} else {
-						$special = false;
-					}
-	
-					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
-					} else {
-						$tax = false;
-					}
-	
-					if ($this->config->get('config_review_status')) {
-						$rating = (int)$result['rating'];
-					} else {
-						$rating = false;
-					}
-	
-					$data['related_products'][] = array(
-						'product_id'  => $result['product_id'],
-						'thumb'       => $image,
-						'name'        => $result['name'],
-						'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
-						'price'       => $price,
-						'special'     => $special,
-						'tax'         => $tax,
-						'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
-						'rating'      => $rating,
-						'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
-					);
-				}
 			}
 
 			$data['tags'] = array();

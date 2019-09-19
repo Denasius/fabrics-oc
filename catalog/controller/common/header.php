@@ -4,7 +4,6 @@
 
 class ControllerCommonHeader extends Controller {
 	public function index() {
-		// TODO Вывести категории для мобилки в шапке
 		// Analytics
 		$this->load->model('setting/extension');
 
@@ -48,7 +47,8 @@ class ControllerCommonHeader extends Controller {
 			$data['logo'] = '';
 		}
 
-		$this->load->language('common/header');		
+		$this->load->language('common/header');
+		
 		
 		$host = isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1')) ? HTTPS_SERVER : HTTP_SERVER;
 		if ($this->request->server['REQUEST_URI'] == '/') {
@@ -73,8 +73,7 @@ class ControllerCommonHeader extends Controller {
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', true), $this->customer->getFirstName(), $this->url->link('account/logout', '', true));
 		
 		$data['home'] = $this->url->link('common/home');
-		$data['wishlist'] = $this->customer->isLogged() ? $this->url->link('account/wishlist', '', true) : 'javascript:void(0);';
-		$data['wishlist_attr_for_link'] = !$this->customer->isLogged() ? 'data-toggle="modal" data-target="#modal-reg"' : '';
+		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['logged'] = $this->customer->isLogged();
 		$data['account'] = $this->url->link('account/account', '', true);
 		$data['register'] = $this->url->link('account/register', '', true);
@@ -99,15 +98,6 @@ class ControllerCommonHeader extends Controller {
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');
-
-		$data['action'] = $this->url->link('account/login', '', true);
-		$data['email'] = $this->config->get('config_email');
-		$data['telephone_link'] = str_replace([' ', '+', '-', '(', ')'], '', $this->config->get('config_telephone'));
-		$data['telephone'] = $this->config->get('config_telephone');
-		$data['additional_telephone'] = $this->config->get('config_fax');
-		$data['additional_telephone_link'] = str_replace([' ', '+', '-', '(', ')'], '', $this->config->get('config_fax'));
-		$data['behavior'] = $this->config->get('config_comment');
-		
 
 		return $this->load->view('common/header', $data);
 	}

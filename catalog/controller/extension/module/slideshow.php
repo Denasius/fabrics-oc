@@ -6,9 +6,9 @@ class ControllerExtensionModuleSlideshow extends Controller {
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 
-		// $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
-		// $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
-		// $this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
 		
 		$data['banners'] = array();
 
@@ -18,7 +18,6 @@ class ControllerExtensionModuleSlideshow extends Controller {
 			if (is_file(DIR_IMAGE . $result['image'])) {
 				$data['banners'][] = array(
 					'title' => $result['title'],
-					'title_additional' => $result['title_additional'],
 					'link'  => $result['link'],
 					'image' => $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])
 				);

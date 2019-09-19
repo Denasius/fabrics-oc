@@ -90,7 +90,6 @@ class ModelBlogArticle extends Model {
 	}
 
 	public function editArticle($article_id, $data) {
-	
 
 		$this->db->query("UPDATE " . DB_PREFIX . "article SET status = '" . (int)$data['status'] . "', noindex = '" . (int)$data['noindex'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE article_id = '" . (int)$article_id . "'");
 

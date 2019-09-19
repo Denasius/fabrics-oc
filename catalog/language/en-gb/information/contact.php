@@ -22,18 +22,6 @@ $_['entry_enquiry']  = 'Enquiry';
 $_['email_subject']  = 'Enquiry %s';
 
 // Errors
-
-$_['error_enquiry']  = 'Enquiry must be between 10 and 3000 characters!';
-
-/**
- * Мои настройки
- */
-
-$_['entry_mail_text']  = 'E-mail';
-$_['entry_address_text']  = 'Shop and warehouse';
-$_['entry_work_text']  = 'Working hours';
 $_['error_name']     = 'Name must be between 3 and 32 characters!';
 $_['error_email']    = 'E-Mail Address does not appear to be valid!';
-$_['error_text']               = 'The text of the review should contain from 5 to 1000 characters!';
-$_['error_phone']               = 'The phone must contain at least 8 characters';
-$_['text_send']    = 'Send';
+$_['error_enquiry']  = 'Enquiry must be between 10 and 3000 characters!';

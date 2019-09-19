@@ -57,6 +57,7 @@ class ControllerCommonLanguage extends Controller {
 			};
 			
 		}
+
 		return $this->load->view('common/language', $data);
 	}
 

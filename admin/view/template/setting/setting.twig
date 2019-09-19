@@ -35,10 +35,9 @@
             <li><a href="#tab-local" data-toggle="tab">{{ tab_local }}</a></li>
             <li><a href="#tab-option" data-toggle="tab">{{ tab_option }}</a></li>
             <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
-            <li><a href="#tab-suppliers" data-toggle="tab">{{ tab_suppliers }}</a></li>
             <li><a href="#tab-mail" data-toggle="tab">{{ tab_mail }}</a></li>
             <li><a href="#tab-server" data-toggle="tab">{{ tab_server }}</a></li>
-			      <li><a href="#tab-seopro" data-toggle="tab">{{ tab_seopro }}</a></li>
+			<li><a href="#tab-seopro" data-toggle="tab">{{ tab_seopro }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -151,88 +150,12 @@
                   <div class="text-danger">{{ error_telephone }}</div>
                   {% endif %} </div>
               </div>
-
-              {# Мои настройки #}
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-fax">{{ entry_fax }}</label>
                 <div class="col-sm-10">
                   <input type="text" name="config_fax" value="{{ config_fax }}" placeholder="{{ entry_fax }}" id="input-fax" class="form-control" />
                 </div>
-              </div>
-
-              {# Иконки соцсетей #}
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_1_title">{{ social_1_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_1_title" value="{{ config_social_1_title }}" placeholder="{{ social_1_title }}" id="social_1_title" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_2_title">{{ social_2_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_2_title" value="{{ config_social_2_title }}" placeholder="{{ social_2_title }}" id="social_2_title" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_3_title">{{ social_3_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_3_title" value="{{ config_social_3_title }}" placeholder="{{ social_3_title }}" id="social_3_title" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_4_title">{{ social_4_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_4_title" value="{{ config_social_4_title }}" placeholder="{{ social_4_title }}" id="social_4_title" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_5_title">{{ social_5_title }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_5_title" value="{{ config_social_5_title }}" placeholder="{{ social_5_title }}" id="social_5_title" class="form-control" />
-                </div>
-              </div>
-
-              {# Ссылки на соцсети #}
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_1_link">{{ social_1_link }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_1_link" value="{{ config_social_1_link }}" placeholder="{{ social_1_link }}" id="social_1_link" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_2_link">{{ social_2_link }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_2_link" value="{{ config_social_2_link }}" placeholder="{{ social_2_link }}" id="social_2_link" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_3_link">{{ social_3_link }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_3_link" value="{{ config_social_3_link }}" placeholder="{{ social_3_link }}" id="social_3_link" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_4_link">{{ social_4_link }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_4_link" value="{{ config_social_4_link }}" placeholder="{{ social_4_link }}" id="social_4_link" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="social_5_link">{{ social_5_link }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_social_5_link" value="{{ config_social_5_link }}" placeholder="{{ social_5_link }}" id="social_5_link" class="form-control" />
-                </div>
-              </div>
-
+              </div>              
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-image">{{ entry_image }}</label>
                 <div class="col-sm-10"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
@@ -1141,31 +1064,6 @@
                 </div>
               </div>
             </div>
-
-            {# Поставщики #}
-            <div class="tab-pane" id="tab-suppliers">
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="supplier_1">{{ supplier_1 }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_supplier_1" value="{{ config_supplier_1 }}" placeholder="{{ supplier_1 }}" id="supplier_1" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="supplier_2">{{ supplier_2 }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_supplier_2" value="{{ config_supplier_2 }}" placeholder="{{ supplier_2 }}" id="supplier_2" class="form-control" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="supplier_3">{{ supplier_3 }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_supplier_3" value="{{ config_supplier_3 }}" placeholder="{{ supplier_3 }}" id="supplier_3" class="form-control" />
-                </div>
-              </div>
-            </div>
-
             <div class="tab-pane" id="tab-mail">
               <fieldset>
                 <legend>{{ text_general }}</legend>

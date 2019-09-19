@@ -1,5 +1,4 @@
 {{ header }}
-
 <div id="product-product" class="container">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
@@ -155,7 +154,6 @@
               <hr>
             </li>
             {% for discount in discounts %}
-
             <li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
             {% endfor %}
             {% endif %}

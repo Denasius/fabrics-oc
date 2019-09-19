@@ -64,8 +64,7 @@ class ControllerAccountWishList extends Controller {
 
 			if ($product_info) {
 				if ($product_info['image']) {
-					//$image = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_height'));
-					$image = $this->config->get('config_url') . 'image/' . $product_info['image'];
+					$image = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_wishlist_height'));
 				} else {
 					$image = false;
 				}
@@ -115,9 +114,6 @@ class ControllerAccountWishList extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-		$data['orders_link'] = $this->url->link('account/order');
-		$data['wish_link'] = $this->url->link('account/wishlist');
-
 		$this->response->setOutput($this->load->view('account/wishlist', $data));
 	}
 
@@ -145,7 +141,7 @@ class ControllerAccountWishList extends Controller {
 
 				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . (int)$this->request->post['product_id']), $product_info['name'], $this->url->link('account/wishlist'));
 
-				$json['total'] = sprintf($this->model_account_wishlist->getTotalWishlist());
+				$json['total'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
 			} else {
 				if (!isset($this->session->data['wishlist'])) {
 					$this->session->data['wishlist'] = array();

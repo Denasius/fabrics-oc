@@ -53,11 +53,11 @@ class ControllerBlogCategory extends Controller {
 		} else {
 			$name = $this->language->get('text_blog');
 		}
-		// Выводит в хлебных крошках дополнительный уровень - Блог --> нахер нужен
-		// $data['breadcrumbs'][] = array(
-		// 	'text' => $name,
-		// 	'href' => $this->url->link('blog/latest')
-		// );
+		
+		$data['breadcrumbs'][] = array(
+			'text' => $name,
+			'href' => $this->url->link('blog/latest')
+		);
 
 		if (isset($this->request->get['blog_category_id'])) {
 			$url = '';
@@ -167,7 +167,6 @@ class ControllerBlogCategory extends Controller {
 			$data['categories'] = array();
 
 			$results = $this->model_blog_category->getCategories($blog_category_id);
-			
 
 			foreach ($results as $result) {
 				
@@ -178,12 +177,9 @@ class ControllerBlogCategory extends Controller {
 
 				$data['categories'][] = array(
 					'name'  => $result['name'] . ($this->config->get('configblog_article_count') ? ' (' . $this->model_blog_article->getTotalArticles($filter_data) . ')' : ''),
-					'href'  => $this->url->link('blog/category', 'blog_category_id=' . $this->request->get['blog_category_id'] . '_' . $result['blog_category_id'] . $url),
-					//'image'  => $this->model_tool_image->resize($result['image'], 292, 206)
-					'image'  => $this->config->get('config_url') . 'image/' . $result['image']
+					'href'  => $this->url->link('blog/category', 'blog_category_id=' . $this->request->get['blog_category_id'] . '_' . $result['blog_category_id'] . $url)
 				);
 			}
-			
 
 			$data['articles'] = array();
 
@@ -204,8 +200,7 @@ class ControllerBlogCategory extends Controller {
 
 			foreach ($results as $result) {
 				if ($result['image']) {
-					//$image = $this->model_tool_image->resize($result['image'], 292, 206);
-					$image  = $this->config->get('config_url') . 'image/' . $result['image'];
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get('configblog_image_article_width'), $this->config->get('configblog_image_article_height'));
 				} else {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('configblog_image_article_width'), $this->config->get('configblog_image_article_height'));
 				}
@@ -355,8 +350,6 @@ class ControllerBlogCategory extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$data['production_link'] = $this->url->link('blog/category', 'blog_category_id=78');
-
 			$this->response->setOutput($this->load->view('blog/category', $data));
 		} else {
 			$url = '';
@@ -403,7 +396,7 @@ class ControllerBlogCategory extends Controller {
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
-			$data['header'] = $this->load->controller('common/header');			
+			$data['header'] = $this->load->controller('common/header');
 
 			$this->response->setOutput($this->load->view('error/not_found', $data));
 		}

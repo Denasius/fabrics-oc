@@ -23,11 +23,11 @@ class ControllerBlogArticle extends Controller {
 		} else {
 			$name = $this->language->get('text_blog');
 		}
-		// Выводит в хлебных крошках дополнительный уровень - Блог --> нахер нужен
-		// $data['breadcrumbs'][] = array(
-		// 	'text' => $name,
-		// 	'href' => $this->url->link('blog/latest')
-		// );
+		
+		$data['breadcrumbs'][] = array(
+			'text' => $name,
+			'href' => $this->url->link('blog/latest')
+		);
 		
 		$this->load->model('blog/category');	
 		
@@ -87,7 +87,6 @@ class ControllerBlogArticle extends Controller {
 		$this->load->model('blog/article');
 		
 		$article_info = $this->model_blog_article->getArticle($article_id);
-
 		
 		if ($article_info) {
 			$url = '';
@@ -130,11 +129,11 @@ class ControllerBlogArticle extends Controller {
 			$this->document->setDescription($article_info['meta_description']);
 			$this->document->setKeywords($article_info['meta_keyword']);
 			$this->document->addLink($this->url->link('blog/article', 'article_id=' . $this->request->get['article_id']), 'canonical');
-			// $this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
-			// $this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
-			// $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment.js');
-			// $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
-			// $this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+			$this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
+			$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
+			$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment.js');
+			$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
+			$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
 			if ($article_info['meta_h1']) {	
 				$data['heading_title'] = $article_info['meta_h1'];
@@ -201,9 +200,6 @@ class ControllerBlogArticle extends Controller {
 			$data['text_views'] = $this->language->get('text_views');
 			
 			$this->load->model('tool/image');
-			$data['article_image'] = $this->model_tool_image->resize($article_info['image'], 697, 334);
-			
-			$data['article_name'] = $article_info['name'];
 			
 			$results = $this->model_blog_article->getArticleRelated($this->request->get['article_id']);
 			
@@ -234,17 +230,6 @@ class ControllerBlogArticle extends Controller {
 			}
 
 			$this->load->model('tool/image');
-
-			$data['images'] = array();
-
-			$results = $this->model_blog_article->getArticleImages($this->request->get['article_id']);
-
-			foreach ($results as $result) {
-				$data['images'][] = array(
-					'popup' => $this->model_tool_image->resize($result['image'], 700, 336)
-				);
-			}
-
 			$data['products'] = array();
 			
 			$results = $this->model_blog_article->getArticleRelatedProduct($this->request->get['article_id']);
