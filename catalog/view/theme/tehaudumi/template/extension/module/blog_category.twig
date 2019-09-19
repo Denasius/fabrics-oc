@@ -1,0 +1,20 @@
+<div class="b-aside">
+  <ul>
+  {% for category in categories %}
+  {% if category.blog_category_id == blog_category_id %} 
+  <li><a href="{{ production_link }}">{{ heading_title }}</a></li>
+  {% if category.children %}
+  {% for child in category.children %}
+  {% if child.blog_category_id == child_id %}
+  <li class="active"><a href="{{ child.href }}">{{ child.name }}</a></li>
+  {% else %} 
+  <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% else %} <a href="{{ category.href }}" class="list-group-item">{{ category.name }}</a>
+  {% endif %}
+  {% endfor %}
+  </ul>
+</div>
+

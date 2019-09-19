@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Title</title>
+    <meta property="og:title" content="" /> 
+    <meta property="og:description" content="" />
+    <meta name="title" content="" /> 
+    <meta name="description" content="" /> 
+	<link href="css/jquery.fancybox.min.css" rel="stylesheet">
+	<link href="css/slick.css" rel="stylesheet">
+	<link href="css/rating.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/fontawesome-all.css" rel="stylesheet">
+	<link href="webfonts/fonts.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+	<link href=favicon.ico” rel=”shortcut icon” type=”image/x-icon”>
+	<link rel="shortcut icon" href="#">
+	<link rel="shortcut icon" href="favicon.png" type="image/png" />	
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+
+<!-- modal-login -->
+<div class="modal b-modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login" aria-hidden="true">
+	<div class="modal-dialog">
+		<button data-dismiss="modal" class="modal-close"></button>
+		<div class="b-modal-top">
+			<span>Войдите или создайте новый профиль</span>
+		</div>
+		<div class="b-modal-form">
+			<form action="">
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-login"><span>Имя</span></label>
+				</div>
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-pass" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-pass"><span>Пароль</span></label>
+				</div>	
+				<div class="b-modal-form__btns">
+					<input class="b-modal-btn" type="submit" value="Вход">
+					<button class="btn-reg">Регистрация</button>
+				</div>		
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- modal-reg -->
+<div class="modal b-modal fade" id="modal-reg" tabindex="-1" role="dialog" aria-labelledby="modal-reg" aria-hidden="true">
+	<div class="modal-dialog">
+		<button data-dismiss="modal" class="modal-close"></button>
+		<div class="b-modal-top">
+			<span>Создайте новый профиль</span>
+		</div>
+		<div class="b-modal-form">
+			<form action="">
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-login"><span>Почта</span></label>
+				</div>
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-pass2" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-pass2"><span>Придумайте пароль</span></label>
+				</div>
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-pass3" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-pass3"><span>Придумайте пароль</span></label>
+				</div>					
+				<div class="b-modal-form__btns">
+					<input class="b-modal-btn" type="submit" value="Отправить">
+					<button class="btn-reg">Регистрация</button>
+				</div>		
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	<div class="b-container b-catalog">
+
+	<!-- begin b-header -->
+	<header class="b-header" id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-mobile">
+					    <div class="menu-icon">
+					        <div class="menu-icon__wrapper">
+					            <span class="b-menu__icon">
+					                <i class="b-menu__line b-menu__line_1"></i>
+					                <i class="b-menu__line b-menu__line_2"></i>
+					                <i class="b-menu__line b-menu__line_3"></i>
+					            </span>
+					        </div>
+					    </div> 
+					</div>					
+					<div class="b-logo">
+						<img src="images/logo.svg" alt="">
+					</div>
+					<div class="b-header-right">
+						<div class="b-header-content__wrap">
+							<div class="b-xs-top">
+								<div class="xs-lang"></div>
+								<div class="xs-fav"></div>
+								<div class="xs-lk"></div>
+							</div>
+							<div class="xs-logo"></div>
+							<div class="b-xs-search"></div>
+							<div class="b-header-content">
+								<div class="b-header-contacts">
+									<ul>
+										<li><a href="tel:+371 29 41 20 54">+371 29 41 20 54</a></li>
+										<li><a href="tel:+371 27 82 00 82">+371 27 82 00 82</a></li>
+										<li><a href="mailto:info@tehaudumi.lv">info@tehaudumi.lv</a></li>
+									</ul>
+								</div>
+								<div class="b-nav">
+									<ul>
+										<li><a href="">О нас</a></li>
+										<li><a href="">Производство</a></li>
+										<li><a href="">Доставка</a></li>
+										<li><a href="">Oплата</a></li>
+										<li><a href="">Контакты</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="b-mobile-nav">
+								<ul>
+									<li><a href="">«Лавсан» для фильтрации </a></li>
+									<li><a href="">Ткань для отжима соков</a></li>
+									<li><a href="">«Серпянка» ткань для производства сыра</a></li>
+									<li><a href="">Марля медицинская</a></li>
+									<li><a href="">Ткань для фильтрации мёда</a></li>
+									<li><a href="">Ткань для производства творога</a></li>
+									<li><a href="">Ситовые ткани для фильтрации</a></li>
+									<li><a href="">Фильровальная ткань для воздуха</a></li>
+									<li><a href="">Фильровальная ткань для жидкостей</a></li>
+									<li><a href="">Стеклоткани</a></li>
+									<li><a href="">Композитные ткани</a></li>
+									<li><a href="">Брезент водостойкий</a></li>
+									<li><a href="">Поролон</a></li>
+									<li><a href="">Ткани для уличной мебели</a></li>
+									<li><a href="">Ткани для сумок, чехлов</a></li>
+									<li><a href="">Ткань прорезиненная</a></li>
+									<li><a href="">Искуственная кожа</a></li>
+									<li><a href="">Высокопрочные ткани для подвижных соединений</a></li>
+									<li><a href="">Хлопчатобумажные ткани</a></li>
+									<li><a href="">Льняные ткани</a></li>
+									<li><a href="">Мешковина</a></li>
+									<li><a href="">Готовые тенты 120 g/m2</a></li>
+									<li><a href="">Готовые тенты 75 g/m2</a></li>
+									<li><a href="">Войлок</a></li>
+									<li><a href="">Ветошь обтирочная</a></li>
+									<li><a href="">Готовые тенты MAXI-STRONG</a></li>
+									<li><a href="">Готовые тенты 175 g/m2</a></li>
+									<li><a href="">Ткани для театров</a></li>
+									<li><a href="">Ткани для уборки помещений</a></li>
+									<li><a href="">Ветошь обтирочная</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="b-header-container">
+							<div class="b-search-wrapper">
+								<div class="b-search">
+									<input class="b-search-input" type="text" placeholder="Введите запрос">
+									<input class="b-search-btn" type="submit" value="Поиск">
+								</div>
+							</div>
+							<div class="b-lang-wrapper">
+								<div class="b-lang">
+									<ul>
+										<li><a href=""><img src="images/b-lang-img.svg" alt=""></a></li>
+										<li><a href=""><img src="images/b-lang-img2.svg" alt=""></a></li>
+										<li><a href=""><img src="images/b-lang-img3.svg" alt=""></a></li>
+										<li><a href=""><img src="images/b-lang-img4.svg" alt=""></a></li>
+										<li><a href=""><img src="images/b-lang-img5.svg" alt=""></a></li>
+										<li><a href=""><img src="images/b-lang-img6.svg" alt=""></a></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+						<div class="b-header-wrapper">
+							<div class="b-lk-wrap">
+								<div class="b-lk">
+									<button class="b-lk-link" data-toggle="modal" data-target="#modal-reg">Личный кабинет</button>
+								</div>
+							</div>
+							<div class="b-header-wrapper_bottom">
+								<div class="b-favorites-wrap">
+									<div class="b-favorites">
+										<a class="b-favorites-ico" href=""></a>
+									</div>
+								</div>			
+								<div class="b-cart">
+									<div class="b-cart__ico">
+										<div class="b-cart__n">6</div>
+									</div>
+									<div class="b-cart__price">
+										— <span>56$</span>
+									</div>
+								</div>					
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<marquee class="b-header-text" behavior="" direction="">Cамый широкий выбор технических тканей в странах Балтии и в Европе со склада в Риге ! Cамый широкий выбор технических тканей в странах Балтии и в Европе со склада в Риге !</marquee>			
+	</header>
+	<!-- end b-header -->
+
+	<div class="b-breadcreambs">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<ul>
+						<li><a href="">Главная</a></li>
+						<li><a href="">О нас</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>О нас</span>
+					</div>	
+					<div class="b-text-page">
+						<div class="b-about-item">
+							<div class="b-about-item__text">
+								<p>Cамый широкий выбор технических тканей в странах Балтии и в Европе со склада в Риге !</p>
+								<p>О нас: Фирма «Ekobalta VG TECHNICAL TEXTILES»  работает на латвийском рынке с 1996 года и занимается снабжением предприятий техническими тканями. Основной наш принцип и залог многолетней успешной работы - индивидуальный подход к каждому клиенту.</p>
+								<p>Наша фирма динамично развивается и постоянно расширяет свой ассортимент, в настоящий момент предлагаем более 500 артикулов технических тканей для разных областей промышленности. У нас можно купить  техничнские ткани не только оптом, но и в небольшом количестве. </p>
+								<p>Для предприятий Латвии, Литвы и Эстонии сроки доставки 1-2 дня, для Скандинавии  и Европы 3-4 дня. Небольшое количество высылаем с курьерской почтой.</p>
+							</div>
+							<div class="b-about-item__img">
+								<img src="images/b-about-item__img.jpg" alt="">
+							</div>
+						</div>
+						<div class="b-about-item">
+							<div class="b-about-item__text">
+								<p>Нам нравиться предоставлять качественный сервис и создавать Вам хорошее настроение!
+								Мы всегда готовы предоставить Вам подробную информацию по техническим тканям. Все ткани имеют сертификат качества.
+								Мы заинтересованы в долгосрочном сотрудничестве!</p>
+								<p>Целевой потребитель: наши клиенты - предприятия и организации различного профиля не только из Латвии, но и Литвы,</p>
+								<p>Эстонии, Швеции, Германии и других странах.</p>
+								<p>В Латвии наши технические ткани можно купить в торговых сетях «Kurši», «Latvijas ķimija» и др.</p>
+								<p>С уважением,<br/>
+								Менеджер Ирина <br/>
+								+371 29412054</p>
+							</div>
+							<div class="b-about-item__img">
+								<img src="images/b-about-item__img2.jpg" alt="">
+							</div>
+						</div>						
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- begin b-footer -->
+	<footer class="b-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-footer-content">
+						<a href="" class="b-footer-logo">
+							<img src="images/footer-logo.svg" alt="">
+						</a>
+						<div class="b-footer-right">
+							<div class="b-footer-item">
+								<span>Информация</span>
+								<ul>
+									<li><a href="">Оплата</a></li>
+									<li><a href="">О нас</a></li>
+									<li><a href="">Доставка</a></li>
+									<li><a href="">Общие условия</a></li>
+									<li><a href="">Обратная связь</a></li>
+								</ul>
+							</div>
+							<div class="b-footer-item">
+								<span>Служба поддержки</span>
+								<ul>
+									<li><a href="">Обратная связь</a></li>
+									<li><a href="">Карта сайта</a></li>
+								</ul>
+							</div>
+							<div class="b-footer-item">
+								<span>Контакты</span>
+								<ul>
+									<li><a href="tel:+371 27 82 00 82">+371 27 82 00 82</a></li>
+									<li><a href="tel:+371 29 41 20 54">+371 29 41 20 54</a></li>
+									<li><a href="mailto:info@tehaudumi.lv">info@tehaudumi.lv</a></li>
+								</ul>
+								<div class="b-social">
+									<ul>
+										<li><a href=""><i class="fab fa-instagram"></i></a></li>
+										<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+									</ul>
+								</div>
+							</div>												
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="b-footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl">
+						<span>2019 Разработано <a href="">Webernetic</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- end b-footer -->	
+
+	</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9-H5GwlZA4EkUorU0gGHrq0H4pFMPS4"></script>
+	<script src="js/jquery.fancybox.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script src="js/rating.js"></script>
+	<script src="js/fontawesome.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{# Модуль под названием Фильтр по области применения #}
+
+<input type="hidden" id="is_path" value="{% if is_path %}1{% endif %}">
+
+{% if filter_groups %}
+	<div class="b-filters">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-filters-top">
+						<span>{{ heading_title }}</span>
+					</div>
+					<div class="b-filters-content">
+						{% for category in filter_groups %}
+							{% if category.filter %}
+								{% for child in category.filter %}
+									<div class="b-filters-check">
+										<input type="checkbox" id="n{{ child.filter_id }}" name="n" value="{{ child.filter_id }}" />
+										<label for="n{{ child.filter_id }}"><span data-filter-id="{{ child.filter_id }}">{{ child.name }}</span></label>
+									</div>
+								{% endfor %}
+							{% endif %}
+						{% endfor %}	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

@@ -1,0 +1,12 @@
+{# Модуль под названием Партнеры по доставке #}
+<div class="col-xl-5 col-lg-5" id="banner{{ module }}">
+  <div class="b-bottom-items">
+  {% for banner in banners %}
+    <div class="b-bottom-item__img">
+      {% if banner.link %} <a href="{{ banner.link }}"> {% endif %}
+        <img src="{{ banner.image }}" alt="{{ banner.title }}">
+      {% if banner.link %} </a> {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+</div>

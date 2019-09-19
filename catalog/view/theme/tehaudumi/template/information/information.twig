@@ -1,0 +1,84 @@
+{{ header }}
+	<div class="b-breadcreambs">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<ul>
+          {% for breadcrumb in breadcrumbs %}
+						<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+          {% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>{{ heading_title }}</span>
+					</div>	
+					<div class="b-text-page">
+						<div class="b-delivery-top">
+            {{ description }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	(function ($) {
+		var sendFormHandler = function () {
+			$('.b-contacts-form__btn').on('click', function (e) {
+				e.preventDefault();
+				var this_form = $(this).closest('.b-contacts-form'),
+						this_btn = $(this),
+						this_action = "index.php?route=information/contact/sendform",
+						this_method = 'POST',
+						this_data = this_form.serialize();
+
+				return $.ajax({
+					url: this_action,
+					type: this_method,
+					dataType: 'json',
+					data: $('input[name=\'name\'], input[name=\'email\'], input[name=\'phone\'], input[name=\'enquiry\']'),
+					beforeSend: function () {
+						this_btn.val("{{ text_loading }}");
+					},
+					complete: function () {
+						this_btn.val("{{ text_send }}");
+					},
+					success: function (response) {
+						if ( response.error ) {
+							this_form.find('.alert-danger').remove();
+							var errors = '';
+							$(response.error).each(function (index, element) {
+								errors += '<li>' + element + '</li>';
+							});
+							this_form.append('<div class="alert alert-danger" style="margin-top:20px;"><ul style="list-style:none;">'+errors+'</ul></div>');
+						}
+						if( response.success ){
+							this_form.find('.alert-danger').remove();
+							this_form.find('input').val('');
+							this_form.find('textarea').text('');
+							this_form.append('<div class="alert alert-success" style="margin-top:20px;">'+response.success+'</div>')
+						}
+					},
+					error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+				});
+			});
+		}
+
+		$(document).ready(function () {
+			sendFormHandler();
+		});
+	})(jQuery)
+	</script>
+{{ footer }}

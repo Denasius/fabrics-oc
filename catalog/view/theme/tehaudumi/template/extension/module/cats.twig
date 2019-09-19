@@ -1,0 +1,35 @@
+{# Модуль под названием Категории на главной #}
+{% if categories %}
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>{{ heading_title }}</span>
+					</div>					
+				</div>
+			</div>
+			<div class="b-items" data-content-id="b-items">
+				<div class="row">
+				{% for category in categories %}
+					{% if category.children %}
+						{% for child in category.children %}
+							<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" id="{{ child.id }}">
+								<div class="b-item">
+									<a class="b-item-link" href="{{ child.href }}"></a>
+									<div class="b-item__img">
+										<img src="{{ child.image }}" alt="{{ child.name }}">
+									</div>
+									<div class="b-item__text">
+										<span>{{ child.name }}</span>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

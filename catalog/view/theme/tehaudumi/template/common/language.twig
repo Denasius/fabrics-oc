@@ -1,0 +1,23 @@
+{% if languages|length > 1 %}
+<div class="b-lang-wrapper">
+  <form class="b-lang" action="{{ action }}" method="post" enctype="multipart/form-data" id="form-language">
+    <ul>
+      {% for language in languages %}
+        {% if language.code == code %} 
+          <li>
+            <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}">
+          </li>
+        {% else %}
+          <li>
+            <button class="btn btn-link btn-block language-select" type="button" name="{{ language.code }}">
+              <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}">
+            </button>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <input type="hidden" name="code" value="" />
+    <input type="hidden" name="redirect" value="{{ redirect }}" />
+  </form>
+</div>
+{% endif %}

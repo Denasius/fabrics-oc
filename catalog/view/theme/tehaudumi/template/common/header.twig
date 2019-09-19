@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+	<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{{ title }}</title>
+	{% if robots %}
+	<meta name="robots" content="{{ robots }}" />
+	{% endif %}
+	<base href="{{ base }}" />
+	{% if description %}
+	<meta name="description" content="{{ description }}" />
+	{% endif %}
+	{% if keywords %}
+	<meta name="keywords" content="{{ keywords }}" />
+	{% endif %}
+	<meta property="og:title" content="{{ title }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{{ og_url }}" />
+	{% if og_image %}
+	<meta property="og:image" content="{{ og_image }}" />
+	{% else %}
+	<meta property="og:image" content="{{ logo }}" />
+	{% endif %}
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/jquery.fancybox.min.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/slick.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/rating.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/fontawesome-all.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/webfonts/fonts.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/style.css" rel="stylesheet">
+	<link href="catalog/view/theme/tehaudumi/stylesheet/css/responsive.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="catalog/view/javascript/js/common.js"></script>
+	{# <script src="catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js"></script>
+	<script src="catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js"></script>
+	<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css"></script> #}
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+<!-- modal-login -->
+<div class="modal b-modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login" aria-hidden="true">
+	<div class="modal-dialog">
+		<button data-dismiss="modal" class="modal-close"></button>
+		<div class="b-modal-top">
+			<span>Войдите или создайте новый профиль</span>
+		</div>
+		<div class="b-modal-form">
+			<form action="">
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-login"><span>Имя</span></label>
+				</div>
+				<div class="b-modal-item">
+					<input class="b-modal-input" required id="inp-pass" type="text" placeholder="">
+					<label class="b-modal-label" for="inp-pass"><span>Пароль</span></label>
+				</div>	
+				<div class="b-modal-form__btns">
+					<input class="b-modal-btn" type="submit" value="Вход">
+					<button class="btn-reg">Регистрация</button>
+				</div>		
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- modal-reg -->
+<div class="modal b-modal fade" id="modal-reg" tabindex="-1" role="dialog" aria-labelledby="modal-reg" aria-hidden="true">
+	<div class="modal-dialog">
+		<button data-dismiss="modal" class="modal-close"></button>
+		<div class="b-modal-top">
+			<span>{{ text_create_new_profile }}</span>
+		</div>
+		<div class="b-modal-form">
+			<form action="{{ action }}" method="post" enctype="multipart/form-data">
+				<div class="b-modal-item">
+					<input type="text" name="email" value="{{ email }}" placeholder="" id="input-email" class="b-modal-input" />
+					<label class="b-modal-label" for="input-email"><span>{{ text_mail }}</span></label>
+				</div>
+				<div class="b-modal-item">
+					<input type="password" required="" name="password" value="{{ password }}" placeholder="" id="input-password" class="b-modal-input" />
+					<label class="b-modal-label" for="input-password"><span>{{ text_password }}</span></label>
+				</div>
+        <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
+				<div class="b-modal-form__btns">
+          <input class="b-modal-btn" type="submit" value="{{ text_login }}" class="btn btn-primary" />
+				  {% if redirect %}
+            <input type="hidden" name="redirect" value="{{ redirect }}" />
+          {% endif %}
+          <a href="{{ register }}" class="btn-reg">{{ text_register }}</a>
+				</div>		
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	<div class="b-container">
+
+	<!-- begin b-header -->
+	<header class="b-header" id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-mobile">
+					    <div class="menu-icon">
+					        <div class="menu-icon__wrapper">
+					            <span class="b-menu__icon">
+					                <i class="b-menu__line b-menu__line_1"></i>
+					                <i class="b-menu__line b-menu__line_2"></i>
+					                <i class="b-menu__line b-menu__line_3"></i>
+					            </span>
+					        </div>
+					    </div> 
+					</div>					
+					<div class="b-logo">
+						<a href="{{ home }}">
+							<img src="{{ logo }}" title="{{ name }}" alt="{{ name }}">
+						</a>
+					</div>
+					<div class="b-header-right">
+						<div class="b-header-content__wrap">
+							<div class="b-xs-top">
+								<div class="xs-lang"></div>
+								<div class="xs-fav"></div>
+								<div class="xs-lk"></div>
+							</div>
+							<div class="xs-logo"></div>
+							<div class="b-xs-search"></div>
+							<div class="b-header-content">
+								<div class="b-header-contacts">
+									<ul>
+										<li><a href="tel:{{ additional_telephone_link }}">{{ additional_telephone }}</a></li>
+										<li><a href="{{ telephone_link }}">{{ telephone }}</a></li>
+										<li><a href="mailto:{{ email }}">{{ email }}</a></li>
+									</ul>
+								</div>
+								{{ menu }}
+							</div>
+							<div class="b-mobile-nav">
+								<ul>
+									<li><a href="">«Лавсан» для фильтрации </a></li>
+									<li><a href="">Ткань для отжима соков</a></li>
+									<li><a href="">«Серпянка» ткань для производства сыра</a></li>
+									<li><a href="">Марля медицинская</a></li>
+									<li><a href="">Ткань для фильтрации мёда</a></li>
+									<li><a href="">Ткань для производства творога</a></li>
+									<li><a href="">Ситовые ткани для фильтрации</a></li>
+									<li><a href="">Фильровальная ткань для воздуха</a></li>
+									<li><a href="">Фильровальная ткань для жидкостей</a></li>
+									<li><a href="">Стеклоткани</a></li>
+									<li><a href="">Композитные ткани</a></li>
+									<li><a href="">Брезент водостойкий</a></li>
+									<li><a href="">Поролон</a></li>
+									<li><a href="">Ткани для уличной мебели</a></li>
+									<li><a href="">Ткани для сумок, чехлов</a></li>
+									<li><a href="">Ткань прорезиненная</a></li>
+									<li><a href="">Искуственная кожа</a></li>
+									<li><a href="">Высокопрочные ткани для подвижных соединений</a></li>
+									<li><a href="">Хлопчатобумажные ткани</a></li>
+									<li><a href="">Льняные ткани</a></li>
+									<li><a href="">Мешковина</a></li>
+									<li><a href="">Готовые тенты 120 g/m2</a></li>
+									<li><a href="">Готовые тенты 75 g/m2</a></li>
+									<li><a href="">Войлок</a></li>
+									<li><a href="">Ветошь обтирочная</a></li>
+									<li><a href="">Готовые тенты MAXI-STRONG</a></li>
+									<li><a href="">Готовые тенты 175 g/m2</a></li>
+									<li><a href="">Ткани для театров</a></li>
+									<li><a href="">Ткани для уборки помещений</a></li>
+									<li><a href="">Ветошь обтирочная</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="b-header-container">
+						{{ search }}
+            {{language}}
+						</div>
+						<div class="b-header-wrapper">
+							<div class="b-lk-wrap">
+								<div class="b-lk">
+                {% if logged %}
+                  <a href="{{ account }}" class="my-account-link">{{ text_account }}</a>
+                  <a href="{{ logout }}" class="my-account-link">{{ text_logout }}</a>
+                {% else %}
+                  <button class="b-lk-link" data-toggle="modal" data-target="#modal-reg">{{ text_account }}</button>
+                {% endif %}
+									
+								</div>
+							</div>
+							<div class="b-header-wrapper_bottom">
+								<div class="b-favorites-wrap">
+									<div class="b-favorites">
+										<a class="b-favorites-ico" {{wishlist_attr_for_link}} href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}" style="background-image: url(catalog/view/theme/tehaudumi/image/b-favorites-ico.svg)"><div class="b-cart__n"><span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></div></a>
+									</div>
+								</div>			
+								{{ cart }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% if behavior is not empty %}
+			<marquee class="b-header-text" behavior="" direction="">{{ behavior }}</marquee>
+		{% endif %}
+	</header>
+	<!-- end b-header -->

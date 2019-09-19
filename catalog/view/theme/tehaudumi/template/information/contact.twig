@@ -1,0 +1,113 @@
+{{ header }}
+
+<div class="b-breadcreambs">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<ul>
+						{% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>{{ heading_title }}</span>
+					</div>	
+					<div class="b-contacts">
+						<div class="b-contacts-left">
+							<div class="b-contacts-item">
+								<div class="b-contacts-item__left">
+									<span>{{ text_telephone }}:</span>
+								</div>
+								<div class="b-contacts-item__right">
+									<a href="tel:{{ telephone_link }}">{{ telephone }}</a>
+                  {% if fax %}
+									<a href="tel:{{ fax_link }}">{{ fax }}</a>
+                  {% endif %}
+								</div>
+							</div>
+							<div class="b-contacts-item">
+								<div class="b-contacts-item__left">
+									<span>{{ entry_mail_text }}:</span>
+								</div>
+								<div class="b-contacts-item__right">
+									<a href="mailto:{{ conf_email }}">{{ conf_email }}</a>
+								</div>
+							</div>
+							<div class="b-contacts-item">
+								<div class="b-contacts-item__left">
+									<span>{{entry_address_text}}:</span>
+								</div>
+								<div class="b-contacts-item__right">
+									<p>{{ address }}</p>
+								</div>
+							</div>
+							<div class="b-contacts-item">
+								<div class="b-contacts-item__left">
+									<span>{{entry_work_text}}:  </span>
+								</div>
+								<div class="b-contacts-item__right">
+									<p>{{open}}</p>
+								</div>
+							</div>																					
+						</div>	
+						<div id="map"></div>						
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div> 
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9-H5GwlZA4EkUorU0gGHrq0H4pFMPS4"></script>
+<script>
+// google maps
+
+// When the window has finished loading create our google map below
+google.maps.event.addDomListener(window, 'load', init2);
+
+function init2() {
+    // Basic options for a simple Google Map
+    // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+    var mapOptions = {
+        // How zoomed in you want the map to start at (always required)
+        zoom: 15,
+        disableDefaultUI: true,
+
+        // The latitude and longitude to center the map (always required)
+
+        center: new google.maps.LatLng({{geocode}}), // ZP
+
+        // How you would like to style the map. 
+        // This is where you would paste any style found on Snazzy Maps.
+    };
+
+    // Get the HTML DOM element that will contain your map 
+    // We are using a div with id="map" seen below in the <body>
+    var mapElement = document.getElementById('map');
+
+    // Create the Google Map using our element and options defined above
+    var map = new google.maps.Map(mapElement, mapOptions);
+
+    // Let's also add a marker while we're at it
+    var marker = new google.maps.Marker({ 
+    position: new google.maps.LatLng(55.772643, 37.678384),
+    map: map,
+/*    title: 'Snazzy!',
+            icon: {
+        url: "images/logo.svg",
+        scaledSize: new google.maps.Size(60, 60),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(40, 80)
+    }*/
+
+    }); 
+}
+</script>
+{{ footer }}

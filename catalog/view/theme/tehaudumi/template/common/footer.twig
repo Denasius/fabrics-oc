@@ -1,0 +1,80 @@
+	<!-- begin b-footer -->
+	<footer class="b-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-footer-content">
+						<a href="" class="b-footer-logo">
+							<img src="catalog/view/theme/tehaudumi/image/footer-logo.svg" alt="">
+						</a>
+						<div class="b-footer-right">
+							<div class="b-footer-item">
+								<span>{{ text_information }}</span>
+								<ul>
+									<li><a href="{{ payment_link }}">{{ payment_menu }}</a></li>
+									<li><a href="{{ about_link }}">{{ about_menu }}</a></li>
+									<li><a href="{{ delivery_link }}">{{ delivery_menu }}</a></li>
+									<li><a href="{{ general_terms_link }}">{{ general_terms_menu }}</a></li>
+								</ul>
+							</div>
+							<div class="b-footer-item">
+								<span>{{ text_service }}</span>
+								<ul>
+									<li><a href="{{ feedback_link }}">{{ feedback_menu }}</a></li>
+									<li><a href="{{ sitemap }}">{{ site_map_menu }}</a></li>
+								</ul>
+							</div>
+							<div class="b-footer-item">
+								<span>{{ text_contact }}</span>
+								<ul>
+									<li><a href="tel:{{ telephone_link }}">{{ telephone }}</a></li>
+									<li><a href="tel:{{ additional_telephone_link }}">{{ additional_telephone }}</a></li>
+									<li><a href="mailto:{{ email }}">{{ email }}</a></li>
+								</ul>
+								<div class="b-social">
+									<ul>
+									{% if social_1_icon %}
+										<li><a href="{{ social_1_link }}"><i class="{{ social_1_icon }}"></i></a></li>
+									{% endif %}
+									{% if social_2_icon %}
+										<li><a href="{{ social_2_link }}"><i class="{{ social_2_icon }}"></i></a></li>
+									{% endif %}
+									{% if social_3_icon %}
+										<li><a href="{{ social_3_link }}"><i class="{{ social_3_icon }}"></i></a></li>
+									{% endif %}
+									{% if social_4_icon %}
+										<li><a href="{{ social_4_link }}"><i class="{{ social_4_icon }}"></i></a></li>
+									{% endif %}
+									{% if social_5_icon %}
+										<li><a href="{{ social_5_link }}"><i class="{{ social_5_icon }}"></i></a></li>
+									{% endif %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="b-footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl">
+						<span>{{ current_year }} Разработано <a href="https://webernetic.by">Webernetic</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- end b-footer -->	
+
+	</div>
+	<script src="catalog/view/javascript/js/jquery.fancybox.min.js"></script>
+	<script src="catalog/view/javascript/js/slick.min.js"></script>
+	<script src="catalog/view/javascript/js/rating.js"></script>
+	<script src="catalog/view/javascript/js/fontawesome.min.js"></script>
+	<script src="catalog/view/theme/tehaudumi/stylesheet/bootstrap/js/bootstrap.min.js"></script>
+	<script src="catalog/view/javascript/js/script.js"></script>
+	<script src="catalog/view/javascript/js/filter.js"></script>
+</body>
+</html>

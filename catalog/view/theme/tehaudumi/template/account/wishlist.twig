@@ -1,0 +1,84 @@
+{{ header }}
+	<div class="b-breadcreambs">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<ul>
+						{% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+					</ul>
+          {% if success %}
+          <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+          {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>{{ heading_title }}</span>
+					</div>
+					<div class="b-wrapper">
+						<div class="row">
+							<div class="col-xl-3 col-lg-3 col-md-4 x-hidden">
+								<div class="b-aside">
+									<ul>
+										<li class="active"><a href="{{ wish_link }}">{{ text_order_wishlist }}</a></li>
+										<li><a href="{{ orders_link }}">{{text_order_history}}</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
+								<div class="b-items">
+									<div class="row">
+                    {% if products %}
+                      {% for product in products %}
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                          <div class="b-item">
+                            <a class="b-item-link" href=""></a>
+														<a href="{{ product.remove }}" data-toggle="tooltip" title="{{ button_remove }}" class="fav-btn" style="color:black; font-size:25px;"><i class="fa fa-times"></i></a>
+                            {% if product.thumb %}
+                            <div class="b-item__img">
+                              <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}">
+                            </div>
+                            {% endif %}
+                            <div class="b-item__text">
+                              <span>{{ product.name }}</span>
+                            </div>
+                            <div class="b-item__bottom">
+                              <div class="b-item__price">
+                              {% if product.price %}
+                                {% if not product.special %}
+                                  <span>{{text_price}} {{ product.price }} *</span>
+                                {% else %}
+                                  <b>{{text_price}} {{ product.special }}</b> <span>{{text_price}} {{ product.price }} *</span>
+                                {% endif %}
+                              {% endif %}
+                              </div>
+                              <button class="add-cart" onclick="cart.add('{{ product.product_id }}');"></button>
+															
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    {% else %}
+                      <p>{{ text_wish_empty }}</p>
+                    {% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>									
+				</div>
+			</div>
+		</div>
+	</div>
+{{ footer }}

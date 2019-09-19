@@ -1,0 +1,52 @@
+{{ header }}
+	<div class="b-breadcreambs">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<ul>
+          {% for breadcrumb in breadcrumbs %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+          {% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="b-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl">
+					<div class="b-title">
+						<span>{{ heading_title }}</span>
+					</div>					
+				</div>
+			</div>
+			<div class="b-wrapper">
+				<div class="row">
+					<div class="col-xl-3 col-lg-3 col-md-4 x-hidden">
+            {{ column_left }}
+					</div>
+					<div class="col-xl-9 col-lg-9 col-md-8 col-sm-12">
+						<div class="b-manufacture">
+            {% if article_image %}
+							<img src="{{ article_image }}" title="{{ article_name }}" alt="{{ article_name }}">
+            {% endif %}
+							{{ description }}
+							{% if images %}
+							<div class="b-manufacture-slider">
+							{% for image in images %}
+								<div class="b-manufacture-slider__item">
+									<img src="{{ image.popup }}" alt="">
+								</div>
+							{% endfor %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{{ footer }} 

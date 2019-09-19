@@ -1,0 +1,40 @@
+{# Ajax запрос отфильтрованных товаров #}
+
+{% if filtered_products %}
+  {% for product in filtered_products %}
+    <div class="{{ class }}" id="{{ product.prod_id }}">
+      <div class="b-item">
+        <a class="b-item-link" href="{{ product.prod_href }}"></a>
+        <button class="fav-btn" type="button" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.prod_id }}');">
+          <svg width="27" height="23" viewBox="0 0 27 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.5 11.5L13.5 21.5L3.50003 11.5L3.50003 11.5C3.00001 11 -0.499956 7.50001 3.50003 3.50002C7.50003 -0.499978 13.5 2.50004 13.5 5.00004C13.5 2.5 19.5 -0.499978 23.5 3.50002C26.7 6.70002 24.8334 10.1667 23.5 11.5Z" stroke="" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="b-item__img">
+          <img src="{{ product.prod_image }}" alt="{{ product.prod_name }}">
+        </div>
+        <div class="b-item__text">
+          <span>{{ product.prod_name }}</span>
+        </div>
+        {% if product.prod_price %}
+          <div class="b-item__bottom">
+            <div class="b-item__price">
+              {% if not product.prod_special %}
+                <span>{{text_price}} {{ product.prod_price }} *</span>
+              {% else %}
+                <span class="price-new">{{text_price}} {{ product.prod_special }}</span> <span class="price-old">{{text_price}} {{ product.prod_price }}</span>
+              {% endif %}
+            </div>
+            <button class="add-cart" type="button" id="button-cart" onclick="cart.add('{{ product.prod_id }}');"></button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="col-12" id="{{ product.prod_id }}">
+    <div class="b-item">
+      <p>{{ empty }}</p>
+    </div>
+  </div>
+{% endif %}

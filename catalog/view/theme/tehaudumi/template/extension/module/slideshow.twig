@@ -1,0 +1,21 @@
+{# Модуль под названием Слайдшоу Home page #}
+<div class="b-slider">
+	{% for banner in banners %}
+		<div class="b-slider-item" style="background: url({{ banner.image }});">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl">
+						<div class="b-slider-item__text">
+							<div class="b-slider-item__text__wrap">
+								<h1 class="b-main-text">{% if banner.link %}<a href="{{ banner.link }}">{% endif %} {{ banner.title }} {% if banner.link %}</a>{% endif %}</h1>
+								{% if banner.title_additional %}
+									<p><b>Акция:</b><span>{{ banner.title_additional }}</span></p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}							
+	</div>
