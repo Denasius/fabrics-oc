@@ -185,7 +185,21 @@ $('.b-quantity .plus_cart ').click(function() {
     return false;
 });
 
- $('.star-rating').rating(); 
+ $('.star-rating').rating();
+
+ $('.b-radio label').click(function () {
+     $('.b-radio').each(function (index, element) {
+         var checkedRadio = $(element).find('input[type="radio"]').is(':checked');
+         if ( ! checkedRadio ) {
+             $('.b-radio').find('select').removeClass('active');
+         }
+     });
+     $(this).closest('.b-radio').find('select').addClass('active');
+ });
+
+ // if ( ! radioChecked ) {
+ //     $(this).closest('.b-radio').find('select').fadeOut(500);
+ // }
 
 // $('.b-order-item__top').click(function(){
 //   $(this).next().slideToggle('active');
@@ -241,15 +255,6 @@ $('.b-quantity .plus_cart ').click(function() {
 $('.b-cart-form__top ul li a').click(function(){
       $('#t3').removeClass('active');
 });*/
- 
-
-
-
-
- 
-
-
-
 
 });
 

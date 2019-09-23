@@ -15,7 +15,7 @@
 							{% if category.filter %}
 								{% for child in category.filter %}
 									<div class="b-filters-check">
-										<input type="checkbox" id="n{{ child.filter_id }}" name="n" value="{{ child.filter_id }}" />
+										<input type="checkbox" data-filter-id="{{ child.filter_id }}" id="n{{ child.filter_id }}" name="n" value="{{ child.filter_id }}" />
 										<label for="n{{ child.filter_id }}"><span data-filter-id="{{ child.filter_id }}">{{ child.name }}</span></label>
 									</div>
 								{% endfor %}

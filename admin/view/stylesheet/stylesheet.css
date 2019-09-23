@@ -10,6 +10,45 @@ html, body {
 h1, h2, h3, h4, h5, h6, p {
 	margin-top: 0;
 }
+
+.form-supplier{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	max-width: calc(100% - 100px);
+}
+.col-supplier{
+	text-align: right;
+	text-align: -webkit-right;
+}
+
+.add-supplier,
+.add-supplier__2,
+.add-supplier__3{
+	margin-top: 10px;
+
+}
+
+a.remove-supplier{
+	margin-right: 5px;
+}
+
+.form-control-supplier input.form-input-supplier{
+	display: inline-block !important;
+	max-width: calc(100% - 50px) !important;
+	margin-top: 1px;
+}
+.span__supplier{
+	display: block;
+}
+
 .page-header {
 	vertical-align: middle;
 	margin: 20px 0 15px 0;
@@ -669,8 +708,6 @@ input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked:
 }
 #extension-list span {
 	font-weight: 600;
-}
-
 }
 #marketplace-extension-info #banner img {
 	margin-left: auto;

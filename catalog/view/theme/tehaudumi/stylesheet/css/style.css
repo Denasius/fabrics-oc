@@ -877,7 +877,7 @@ textarea{
 }
 /* -------------- b-footer -------------- */
 .b-footer{
-	background: #281C05;
+	background: #1e0f0f;
 }
 .b-footer-content{
 	display: flex;
@@ -2305,4 +2305,25 @@ textarea.b-modal-input{
 	min-height: 100px;
 	resize: none;
     border-bottom: 1px solid #000000;
+}
+
+#shipping_address_select,
+#shipping_address_latvia_pasts,
+#shipping_address_omnivia{
+	width: 100%;
+	margin-top: 10px;
+	min-height: 30px;
+    border: 1px solid rgba(255, 92, 0, 0.3);
+	display: none;
+}
+
+ #shipping_address_select.active,
+ #shipping_address_latvia_pasts.active,
+ #shipping_address_omnivia.active{
+	 display: block;
+ }
+
+.b-cart-radio-btns{
+    min-width: 300px;
+
 }

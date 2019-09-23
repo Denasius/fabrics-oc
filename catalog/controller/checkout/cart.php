@@ -258,6 +258,17 @@ class ControllerCheckoutCart extends Controller {
 			$data['supplier_1'] = $this->config->get('config_supplier_1');
 			$data['supplier_2'] = $this->config->get('config_supplier_2');
 			$data['supplier_3'] = $this->config->get('config_supplier_3');
+            for( $i = 0; $i <= 200; $i++ ){
+                $data['config_supplier_1_' .$i] = $this->config->get('config_supplier_1_' .$i);
+            }
+
+            for( $j = 0; $j <= 200; $j++ ){
+                $data['config_supplier_2_' .$j] = $this->config->get('config_supplier_2_' .$j);
+            }
+
+            for( $k = 0; $k <= 200; $k++ ){
+                $data['config_supplier_3_' .$k] = $this->config->get('config_supplier_3_' .$k);
+            }
 
             $this->response->setOutput($this->load->view('checkout/cart', $data));
 		} else {
@@ -302,10 +313,12 @@ class ControllerCheckoutCart extends Controller {
 			}
 
 			if (isset($this->request->post['option'])) {
-				$option = array_filter($this->request->post['option']);
-			} else {
+                $option = array_filter($this->request->post['option']);
+
+            } else {
 				$option = array();
 			}
+
 
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
 
@@ -513,8 +526,8 @@ class ControllerCheckoutCart extends Controller {
 	}
 
 	public function makeOrder(){
+
         if($this->request->server['REQUEST_METHOD'] == 'POST'){
-            // TODO Добавить order_status
             /*
              * Валидирую обязательные поля
              * */
@@ -524,72 +537,48 @@ class ControllerCheckoutCart extends Controller {
             if ( isset($this->request->post['name']) && ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) ) {
                 $json['error'][] = $this->language->get('error_name');
             }
-
             if ( isset($this->request->post['email']) && ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL))) {
                 $json['error'][] = $this->language->get('error_email');
             }
-
             if ( isset($this->request->post['company']) && ( (utf8_strlen($this->request->post['company']) < 3) || (utf8_strlen($this->request->post['company']) > 25) )) {
                 $json['error'][] = $this->language->get('error_company');
             }
-
             if ( isset($this->request->post['phone']) && ( (utf8_strlen($this->request->post['phone']) < 8) || (utf8_strlen($this->request->post['phone']) > 25) )) {
                 $json['error'][] = $this->language->get('error_phone');
             }
-
             if ( isset($this->request->post['legal_address']) && ( (utf8_strlen($this->request->post['legal_address']) < 3) || (utf8_strlen($this->request->post['legal_address']) > 25) )) {
                 $json['error'][] = $this->language->get('error_legal_address');
             }
-
             if ( isset($this->request->post['country']) && ( (utf8_strlen($this->request->post['country']) < 3) || (utf8_strlen($this->request->post['country']) > 25) )) {
                 $json['error'][] = $this->language->get('error_country');
             }
-
-
             if ( isset($this->request->post['region']) && ( (utf8_strlen($this->request->post['region']) < 3) || (utf8_strlen($this->request->post['region']) > 25) )) {
                 $json['error'][] = $this->language->get('error_region');
             }
-
-
-
             if ( isset($this->request->post['town']) && ( (utf8_strlen($this->request->post['town']) < 3) || (utf8_strlen($this->request->post['town']) > 25) )) {
                 $json['error'][] = $this->language->get('error_town');
             }
-
-
-
             if ( isset($this->request->post['index']) && ( (utf8_strlen($this->request->post['index']) < 3) || (utf8_strlen($this->request->post['index']) > 25) )) {
                 $json['error'][] = $this->language->get('error_index');
             }
-
-
-
             if ( isset($this->request->post['street']) && ( (utf8_strlen($this->request->post['street']) < 3) || (utf8_strlen($this->request->post['street']) > 25) )) {
                 $json['error'][] = $this->language->get('error_street');
             }
-
-
-
             if ( isset($this->request->post['build']) && ( (utf8_strlen($this->request->post['build']) < 1) || (utf8_strlen($this->request->post['build']) > 25) )) {
                 $json['error'][] = $this->language->get('error_build');
             }
-
             if ( isset($this->request->post['apartment']) && ( (utf8_strlen($this->request->post['apartment']) < 1) || (utf8_strlen($this->request->post['apartment']) > 25) )) {
                 $json['error'][] = $this->language->get('error_apartment');
             }
-
-
             if ( isset($this->request->post['comment']) && ( (utf8_strlen($this->request->post['comment']) < 5) || (utf8_strlen($this->request->post['comment']) > 1000) )) {
                 $json['error'][] = $this->language->get('error_comment');
             }
             if (( isset($this->request->post['type']) && $this->request->post['type'] == $this->language->get('legal_persone') ) && !isset($this->request->post['confirm'])) {
                 $json['error'][] = $this->language->get('error_confirm');
             }
-
             if (( isset($this->request->post['type']) && $this->request->post['type'] == $this->language->get('nat_persone') ) && !isset($this->request->post['confirm_2'])) {
                 $json['error'][] = $this->language->get('error_confirm');
             }
-
             if ( ! $json ) {
                 /*
                  * Ложу заказ в БД
@@ -692,7 +681,7 @@ class ControllerCheckoutCart extends Controller {
                 $order_data['payment_country_id'] = 20;
                 $order_data['payment_address_format'] = ' ';
                 $order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
-                $order_data['payment_method'] = isset($this->request->post['n']) ? $this->request->post['n'] : ' ';
+                $order_data['payment_method'] = isset($this->request->post['n']) ? $this->request->post['n'] . '( ' . $this->request->post['shipping_address'] . ' )' : ' ';
                 $order_data['payment_code'] = 'cod';
                 $order_data['shipping_firstname'] = '';
                 $order_data['shipping_lastname'] = '';
@@ -707,7 +696,7 @@ class ControllerCheckoutCart extends Controller {
                 $order_data['shipping_country_id'] = '';
                 $order_data['shipping_address_format'] = '';
                 $order_data['shipping_custom_field'] = array();
-                $order_data['shipping_method'] = isset($this->request->post['type']) ? $this->request->post['type'] : '';
+                $order_data['shipping_method'] = isset($this->request->post['n']) ? $this->request->post['n']  . '( ' . $this->request->post['shipping_address'] . ' )' : '';
                 $order_data['shipping_code'] = '';
 
                 $order_data['products'] = array();

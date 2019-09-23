@@ -343,7 +343,34 @@ class ControllerSettingSetting extends Controller {
 			$data['config_supplier_3'] = $this->config->get('config_supplier_3');
 		}
 
-		
+        /*
+        * Без кастылей никуда
+        */
+        for( $i = 0; $i <= 200; $i++ ){
+            if ( isset($this->request->post['config_supplier_1_' . $i]) ) {
+                $data['config_supplier_1_' . $i] = $this->request->post['config_supplier_1_' . $i];
+            } else {
+                $data['config_supplier_1_' .$i] = $this->config->get('config_supplier_1_' .$i);
+            }
+        }
+
+        for( $j = 0; $j <= 200; $j++ ){
+            if ( isset($this->request->post['config_supplier_2_' . $j]) ) {
+                $data['config_supplier_2_' . $j] = $this->request->post['config_supplier_2_' . $j];
+            } else {
+                $data['config_supplier_2_' .$j] = $this->config->get('config_supplier_2_' .$j);
+            }
+        }
+
+        for( $k = 0; $k <= 200; $k++ ){
+
+            if ( isset($this->request->post['config_supplier_3_' . $k]) ) {
+                $data['config_supplier_3_' . $k] = $this->request->post['config_supplier_3_' . $k];
+            } else {
+                $data['config_supplier_3_' .$k] = $this->config->get('config_supplier_3_' .$k);
+            }
+
+        }
 
 
 		if (isset($this->request->post['config_fax'])) {

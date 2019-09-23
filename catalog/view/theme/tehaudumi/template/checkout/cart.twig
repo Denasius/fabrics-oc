@@ -67,6 +67,15 @@
 									<div class="b-radio">
 										<input type="radio"  id="n1" name="n" value="{{ pasta_shipping }}" />
 										<label for="n1"><span></span><i>{{ pasta_shipping }}</i></label>
+										<select name="shipping_address" id="shipping_address_select">
+{#											<option value="{{ text_not_checked }}">{{ text_not_checked }}</option>#}
+											{% for i in 0..200 %}
+												{% if _context['config_supplier_1_' ~ i] %}
+													<option value="{{ _context['config_supplier_1_' ~ i] }}" {% if loop.first %}selected="selected"{% endif %}>{{ _context['config_supplier_1_' ~ i] }}</option>
+
+												{% endif %}
+											{% endfor %}
+										</select>
 									</div>
 									<div class="b-radio">
 										<input type="radio" id="n2" name="n" value="{{ courier_shipping }}" />
@@ -75,10 +84,27 @@
 									<div class="b-radio">
 										<input type="radio" id="n3" name="n" value="{{ latvia_pasts_shipping }}" />
 										<label for="n3"><span></span><i>{{ latvia_pasts_shipping }}</i></label>
+										<select name="shipping_address" id="shipping_address_latvia_pasts">
+{#											<option value="{{ text_not_checked }}" selected="selected">{{ text_not_checked }}</option>#}
+											{% for j in 0..200 %}
+												{% if _context['config_supplier_2_' ~ j] %}
+													<option value="{{ _context['config_supplier_2_' ~ j] }}">{{ _context['config_supplier_2_' ~ j] }}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
 									</div>
 									<div class="b-radio">
 										<input type="radio" id="n4" name="n" value="{{ omnivia_shipping }}"/>
 										<label for="n4"><span></span><i>{{ omnivia_shipping }}</i></label>
+										<select name="shipping_address" id="shipping_address_omnivia">
+{#											<option value="{{ text_not_checked }}" selected="selected">{{ text_not_checked }}</option>#}
+											{% for k in 0..200 %}
+												{% if _context['config_supplier_3_' ~ k] %}
+													<option value="{{ _context['config_supplier_3_' ~ k] }}">{{ _context['config_supplier_3_' ~ k] }}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
+
 									</div>
 									<div class="b-radio">
 										<input type="radio" checked="" id="n5" name="n" value="{{ self_shipping }}" />
@@ -319,7 +345,8 @@
 		var checkoutProduct = function () {
 			$('.legal__persone .b-cart-btn').on('click', function (e) {
 				e.preventDefault();
-				var value = $('#checkout input[type=\'radio\']:checked, .legal__persone input[type=\'text\'], .legal__persone input[type=\'hidden\'], .legal__persone input[type=\'checkbox\']:checked, .legal__persone select, .legal__persone textarea')
+
+				var value = $('#checkout input[type=\'radio\']:checked, #checkout input[type=\'radio\']:checked + label + select, .legal__persone input[type=\'text\'], .legal__persone input[type=\'hidden\'], .legal__persone input[type=\'checkbox\']:checked, .legal__persone select, .legal__persone textarea')
 				var this_form = $(this).closest('form');
                 var this_method = 'POST';
                 var this_action = "index.php?route=checkout/cart/makeOrder";
@@ -328,7 +355,7 @@
 
 			$('.nat__persone .b-cart-btn').on('click', function (e) {
 				e.preventDefault();
-				var value = $('#checkout input[type=\'radio\']:checked, .nat__persone input[type=\'text\'], .nat__persone input[type=\'hidden\'], .nat__persone input[type=\'checkbox\']:checked, .nat__persone select, .nat__persone textarea')
+				var value = $('#checkout input[type=\'radio\']:checked, #checkout input[type=\'radio\']:checked + label + select, .nat__persone input[type=\'text\'], .nat__persone input[type=\'hidden\'], .nat__persone input[type=\'checkbox\']:checked, .nat__persone select, .nat__persone textarea').serialize()
 				var this_form = $(this).closest('form');
 				var this_method = 'POST';
 				var this_action = "index.php?route=checkout/cart/makeOrder";
@@ -347,7 +374,7 @@
 			type: method,
 			data: values,
 			success: function (response) {
-				console.log(response)
+				console.log(response);
 				if(response.error){
 					$('.alert-danger').remove();
 				    var errors = '';
@@ -361,7 +388,7 @@
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
-				//alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+
 				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});

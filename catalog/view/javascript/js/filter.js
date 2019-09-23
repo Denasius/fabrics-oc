@@ -19,6 +19,7 @@
         type: "GET",
         data: data,
         success: function (response) {
+          console.log(response)
           if( response == '{"error":"error"}' ){
               window.location.reload();
           }else{

@@ -1144,24 +1144,71 @@
 
             {# Поставщики #}
             <div class="tab-pane" id="tab-suppliers">
-              <div class="form-group">
+              <div class="form-group form-control-supplier">
                 <label class="col-sm-2 control-label" for="supplier_1">{{ supplier_1 }}</label>
-                <div class="col-sm-10">
+                <div class="col-sm-10 col-supplier">
                   <input type="text" name="config_supplier_1" value="{{ config_supplier_1 }}" placeholder="{{ supplier_1 }}" id="supplier_1" class="form-control" />
+                  <div class="form-supplier">
+
+                    {% for i in 0..200 %}
+
+                      {% if _context['config_supplier_1_' ~ i] %}
+                        <span class="span__supplier span-supplier"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="config_supplier_1_{{i}}" value="{{ _context['config_supplier_1_' ~ i] }}" id="{{ _context['supplier_1_' ~ i] }}" class="form-control form-input-supplier" /></span>
+                      {% endif %}
+
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-2 control-label">
+                  Добавить
+                </div>
+                <div class="col-sm-10">
+                  <a href="javascript:void(0);" title="Добавить адрес" class="btn btn-info add-supplier">+</a>
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group form-control-supplier">
                 <label class="col-sm-2 control-label" for="supplier_2">{{ supplier_2 }}</label>
-                <div class="col-sm-10">
+                <div class="col-sm-10 col-supplier">
                   <input type="text" name="config_supplier_2" value="{{ config_supplier_2 }}" placeholder="{{ supplier_2 }}" id="supplier_2" class="form-control" />
+                  <div class="form-supplier">
+
+                    {% for j in 0..200 %}
+
+                      {% if _context['config_supplier_2_' ~ j] %}
+                        <span class="span__supplier span-supplier__2"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="config_supplier_2_{{j}}" value="{{ _context['config_supplier_2_' ~ j] }}" id="{{ _context['supplier_2_' ~ j] }}" class="form-control form-input-supplier" /></span>
+                      {% endif %}
+
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-2 control-label">
+                  Добавить
+                </div>
+                <div class="col-sm-10">
+                  <a href="javascript:void(0);" title="Добавить адрес" class="btn btn-info add-supplier__2">+</a>
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group form-control-supplier">
                 <label class="col-sm-2 control-label" for="supplier_3">{{ supplier_3 }}</label>
-                <div class="col-sm-10">
+                <div class="col-sm-10 col-supplier">
                   <input type="text" name="config_supplier_3" value="{{ config_supplier_3 }}" placeholder="{{ supplier_3 }}" id="supplier_3" class="form-control" />
+                  <div class="form-supplier">
+                    {% for k in 0..200 %}
+
+                      {% if _context['config_supplier_3_' ~ k] %}
+                        <span class="span__supplier span-supplier__3"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="config_supplier_3_{{k}}" value="{{ _context['config_supplier_3_' ~ k] }}" id="{{ _context['supplier_3_' ~ k] }}" class="form-control form-input-supplier" /></span>
+                      {% endif %}
+
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-2 control-label">
+                  Добавить
+                </div>
+                <div class="col-sm-10">
+                  <a href="javascript:void(0);" title="Добавить адрес" class="btn btn-info add-supplier__3">+</a>
                 </div>
               </div>
             </div>
@@ -1656,4 +1703,66 @@ $('select[name=\'config_country_id\']').on('change', function() {
 
 $('select[name=\'config_country_id\']').trigger('change');
 //--></script></div>
+<script type="text/javascript"><!--
+  (function($) {
+    var addSupplied = function () {
+      $('.add-supplier').on('click', function () {
+        $(this).closest('.form-control-supplier').find('.form-supplier').append('<span class="span__supplier span-supplier"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="" value="" id="" class="form-control form-input-supplier" /></span>')
+        // Добавляю атрибуты
+        $('.span-supplier').each(function (index) {
+          $(this).find('input').attr('name', 'config_supplier_1_' + index).attr('id', 'supplier_1_' + index)
+        });
+
+        // Удаляю поставщика
+        $('a.remove-supplier').on('click', function () {
+          $(this).closest('.span-supplier').remove();
+        }); // end remove supplier
+      })
+    }
+
+    var addSupplied__2 = function () {
+      $('.add-supplier__2').on('click', function () {
+        $(this).closest('.form-control-supplier').find('.form-supplier').append('<span class="span__supplier span-supplier__2"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="" value="" id="" class="form-control form-input-supplier" /></span>')
+        // Добавляю атрибуты
+        $('.span-supplier__2').each(function (index) {
+          $(this).find('input').attr('name', 'config_supplier_2_' + index).attr('id', 'supplier_2_' + index)
+        });
+
+        // Удаляю поставщика
+        $('a.remove-supplier').on('click', function () {
+          $(this).closest('.span-supplier__2').remove();
+        }); // end remove supplier
+      })
+    }
+
+    var addSupplied__3 = function () {
+      $('.add-supplier__3').on('click', function () {
+        $(this).closest('.form-control-supplier').find('.form-supplier').append('<span class="span__supplier span-supplier__3"><a href="javascript:void(0)" class="btn btn-danger remove-supplier">-</a><input type="text" name="" value="" id="" class="form-control form-input-supplier" /></span>')
+        // Добавляю атрибуты
+        $('.span-supplier__3').each(function (index) {
+          $(this).find('input').attr('name', 'config_supplier_3_' + index).attr('id', 'supplier_3_' + index)
+        });
+
+        // Удаляю поставщика
+        $('a.remove-supplier').on('click', function () {
+          $(this).closest('.span-supplier__3').remove();
+        }); // end remove supplier
+      })
+    }
+
+    var removeSupplied = function () {
+      // Удаляю поставщика
+      $('a.remove-supplier').on('click', function () {
+        $(this).closest('.span__supplier').remove();
+      }); // end remove supplier
+    }
+
+    $(document).ready(function () {
+      addSupplied();
+      addSupplied__2();
+      addSupplied__3();
+      removeSupplied();
+    });
+  })(jQuery)
+  //--></script>
 {{ footer }} 
