@@ -55,247 +55,255 @@
                       <button type="submit" title="{{ button_update }}" class="b-quantity-btn" style="margin-left:10px;"><i class="fas fa-sync-alt" style="font-size: 17px;"></i></button>
                   </form>
                   <div class="b-cart-price">
-                    <span>{{ product.price }}</span>
+                    <span>{{ product.total }}</span>
                   </div>
                   <button class="b-cart-del" onclick="cart.remove('{{ product.cart_id }}');"></button>
 							</div>
             {% endfor %}
 						</div>
-						<div class="b-cart-right">
+						<div class="b-cart-right" id="checkout">
 							<div class="b-cart-right__top">
 								<div class="b-cart-radio-btns">
 									<div class="b-radio">
-										<input type="radio"  id="n1" name="n" />
-										<label for="n1"><span></span><i>Pasta Stacija</i></label>  
+										<input type="radio"  id="n1" name="n" value="{{ pasta_shipping }}" />
+										<label for="n1"><span></span><i>{{ pasta_shipping }}</i></label>
 									</div>
 									<div class="b-radio">
-										<input type="radio" id="n2" name="n" />
-										<label for="n2"><span></span><i>Курьер</i></label>  
+										<input type="radio" id="n2" name="n" value="{{ courier_shipping }}" />
+										<label for="n2"><span></span><i>{{ courier_shipping }}</i></label>
 									</div>
 									<div class="b-radio">
-										<input type="radio" id="n3" name="n" />
-										<label for="n3"><span></span><i>Latvijas Pasts</i></label>  
+										<input type="radio" id="n3" name="n" value="{{ latvia_pasts_shipping }}" />
+										<label for="n3"><span></span><i>{{ latvia_pasts_shipping }}</i></label>
 									</div>
 									<div class="b-radio">
-										<input type="radio" id="n4" name="n" />
-										<label for="n4"><span></span><i>OMNIVA</i></label>  
+										<input type="radio" id="n4" name="n" value="{{ omnivia_shipping }}"/>
+										<label for="n4"><span></span><i>{{ omnivia_shipping }}</i></label>
 									</div>
 									<div class="b-radio">
-										<input type="radio" checked="" id="n5" name="n" />
-										<label for="n5"><span></span><i>Самовывоз из магазина</i></label>  
+										<input type="radio" checked="" id="n5" name="n" value="{{ self_shipping }}" />
+										<label for="n5"><span></span><i>{{ self_shipping }}</i></label>
 									</div>
 								</div>
 								<div class="b-cart-right__price">
-									<a href="">Обратно в магазин</a>
-									<span>Всего: 95.94 €</span>
+									<a href="/">{{ go_back }}</a>
+									{% for total in totals %}
+										{% if not loop.first %}
+											<span>{{ total.title }}:{{ total.text }}</span>
+										{% endif %}
+									{% endfor %}
 								</div>
 							</div>
 
 							<div class="b-cart-form__top">
 								<ul class="nav">
 									<li>
-										<a class="active" href="#tab1" data-toggle="tab">
+										<a href="#tab1" data-toggle="tab">
 											<div class="b-radio">
-												<input type="radio" id="q1" name="n1" />
-												<label for="q1"><span></span><i>Физическое лицо</i></label>  
+												<input type="radio" id="q1" name="n1" value="{{ legal_persone }}" />
+												<label for="q1"><span></span><i>{{ legal_persone }}</i></label>
 											</div>
 										</a>
 									</li>
 									<li>
-										<a href="#tab2" data-toggle="tab">
+										<a class="active" href="#tab2" data-toggle="tab">
 											<div class="b-radio">
-												<input type="radio" id="q2" name="n1" />
-												<label for="q2"><span></span><i>Юридическое лицо</i></label>  
+												<input type="radio" id="q2" name="n2" value="{{ nat_persone }}" />
+												<label for="q2"><span></span><i>{{ nat_persone }}</i></label>
 											</div>
 										</a>
 									</li>
 								</ul>
 							</div>
 							<div class="tab-content">
-								<div class="tab-pane active" id="tab1">
+								<div class="tab-pane" id="tab1">
 									<div class="b-cart-form__block">
 										<div class="b-cart-form">
-											<form action="">
+											<form class="legal__persone" action="">
+												<input type="hidden" name="type" value="{{ legal_persone }}">
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>ФИО</span></label>
+														<input class="b-modal-input" name="name" required id="inp-name" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-name"><span>{{ text_name }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Почта</span></label>
+														<input class="b-modal-input" name="email" required id="inp-email" type="text" placeholder="" value="{{ customer_email }}">
+														<label class="b-modal-label" for="inp-email"><span>{{ text_email }}</span></label>
 													</div>									
 												</div>
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Название компании</span></label>
+														<input class="b-modal-input" name="company" required id="inp-company" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-company"><span>{{ text_company }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Телефон</span></label>
+														<input class="b-modal-input" name="phone" required id="inp-phone" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-phone"><span>{{ text_phone }}</span></label>
 													</div>									
 												</div>												
 												<div class="b-modal-item">
-													<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-													<label class="b-modal-label" for="inp-login"><span>Юридический  адрес</span></label>
+													<input class="b-modal-input" name="legal_address" required id="inp-legal_address" type="text" placeholder="">
+													<label class="b-modal-label" for="inp-legal_address"><span>{{ text_legal }}</span></label>
 												</div>
 												<div class="b-cart-form__title">
 													<span>Адрес доставки</span>
 												</div>
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Страна</span></label>
+														<input class="b-modal-input" name="country" required id="inp-country" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-country"><span>{{ text_country }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Область</span></label>
+														<input class="b-modal-input" name="region" required id="inp-region" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-region"><span>{{ text_region }}</span></label>
 													</div>									
 												</div>
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Город</span></label>
+														<input class="b-modal-input" name="town" required id="inp-town" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-town"><span>{{ text_town }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Почтовый индекс</span></label>
+														<input class="b-modal-input" name="index" required id="inp-index" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-index"><span>{{ text_postcode }}</span></label>
 													</div>									
 												</div>	
 												<div class="b-cart-form__row b-cart-form__row__2">
 													<div class="b-modal-item b-modal-item__50">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Улица</span></label>
+														<input class="b-modal-input" name="street" required id="inp-street" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-street"><span>{{ text_street }}</span></label>
 													</div>
 													<div class="b-cart-form__col">
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Дом</span></label>
+															<input class="b-modal-input" name="build" required id="inp-build" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-build"><span>{{ text_build }}</span></label>
 														</div>
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Корпус</span></label>
+															<input class="b-modal-input" name="housing" required id="inp-housing" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-housing"><span>{{ text_housing }}</span></label>
 														</div>
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Квартира</span></label>
+															<input class="b-modal-input" name="apartment" required id="inp-apartment" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-apartment"><span>{{ text_apartment }}</span></label>
 														</div>																												
 													</div>									
 												</div>
 												<div class="b-check">
-													<input type="checkbox" id="b1" name="h" />
-													<label for="b1"><span></span><i>Я прочитал Общие Условия и согласен с условиями</i></label>  
+													<input type="checkbox" id="b1" name="confirm" />
+													<label for="b1"><span></span><i>{{ text_confirm }}</i></label>
 												</div>	
-												<input class="b-cart-btn" type="submit" value="Отправить">									
+												<input class="b-cart-btn" type="submit" value="{{ text_send }}">
 											</form>
 										</div>
 									</div>
 								</div>
-								<div class="tab-pane" id="tab2">
+
+								<div class="tab-pane active" id="tab2">
 									<div class="b-cart-form__block">
 										<div class="b-cart-form">
-											<form action="">
+											<form action="" class="nat__persone">
+												<input type="hidden" name="type" value="{{ nat_persone }}">
 												<div class="b-modal-item">
-													<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-													<label class="b-modal-label" for="inp-login"><span>ФИО</span></label>
+													<input class="b-modal-input" name="name" required id="inp-name_2" type="text" placeholder="">
+													<label class="b-modal-label" for="inp-name_2"><span>{{ text_name }}</span></label>
 												</div>												
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Телефон</span></label>
+														<input class="b-modal-input" name="phone" required id="inp-phone_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-phone_2"><span>{{ text_phone }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Почта</span></label>
+														<input class="b-modal-input" name="email" required id="inp-email_2" type="text" placeholder="" value="{{ customer_email }}">
+														<label class="b-modal-label" for="inp-email_2"><span>{{ text_email }}</span></label>
 													</div>									
 												</div>
 												<div class="b-modal-item">
-													<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-													<label class="b-modal-label" for="inp-login"><span>Коментарий</span></label>
+													<textarea class="b-modal-input" name="comment" id="inp-comment" type="text" placeholder=""></textarea>
+													<label class="b-modal-label" for="inp-comment"><span>{{ text_comment }}</span></label>
 												</div>	
 												<div class="b-cart-form__title">
 													<span>Адрес доставки</span>
 												</div>
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Страна</span></label>
+														<input class="b-modal-input" name="country" required id="inp-country_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-country_2"><span>{{ text_country }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Область</span></label>
+														<input class="b-modal-input" name="region" required id="inp-region_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-region_2"><span>{{ text_region }}</span></label>
 													</div>									
 												</div>
 												<div class="b-cart-form__row">
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Город</span></label>
+														<input class="b-modal-input" name="town" required id="inp-town_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-town_2"><span>{{ text_town }}</span></label>
 													</div>
 													<div class="b-modal-item">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Почтовый индекс</span></label>
+														<input class="b-modal-input" name="index" required id="inp-index_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-index_2"><span>{{ text_postcode }}</span></label>
 													</div>									
 												</div>	
 												<div class="b-cart-form__row b-cart-form__row__2">
 													<div class="b-modal-item b-modal-item__50">
-														<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-														<label class="b-modal-label" for="inp-login"><span>Улица</span></label>
+														<input class="b-modal-input" name="street" required id="inp-street_2" type="text" placeholder="">
+														<label class="b-modal-label" for="inp-street_2"><span>{{ text_street }}</span></label>
 													</div>
 													<div class="b-cart-form__col">
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Дом</span></label>
+															<input class="b-modal-input" name="build" required id="inp-build_2" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-build_2"><span>{{ text_build }}</span></label>
 														</div>
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Корпус</span></label>
+															<input class="b-modal-input" name="housing" required id="inp-housing_2" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-housing_2"><span>{{ text_housing }}</span></label>
 														</div>
 														<div class="b-modal-item">
-															<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-															<label class="b-modal-label" for="inp-login"><span>Квартира</span></label>
+															<input class="b-modal-input" name="apartment" required id="inp-apartment_2" type="text" placeholder="">
+															<label class="b-modal-label" for="inp-apartment_2"><span>{{ text_apartment }}</span></label>
 														</div>																												
 													</div>									
 												</div>
 												<div class="b-check">
-													<input type="checkbox" id="b2" name="h" />
-													<label for="b2"><span></span><i>Я прочитал Общие Условия и согласен с условиями</i></label>  
+													<input type="checkbox" id="b2" name="confirm_2" />
+													<label for="b2"><span></span><i>{{ text_confirm }}</i></label>
 												</div>	
-												<input class="b-cart-btn" type="submit" value="Отправить">									
+												<input class="b-cart-btn" type="submit" value="{{ text_send }}">
 											</form>
 										</div>
 									</div>
 								</div>								
 							</div>
-							<div class="b-cart-form__block b-hidden" id="t3">
-								<div class="b-cart-form">
-									<form action="">
-										<div class="b-modal-item">
-											<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-											<label class="b-modal-label" for="inp-login"><span>ФИО</span></label>
-										</div>
-										<div class="b-cart-form__row">
-											<div class="b-modal-item">
-												<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-												<label class="b-modal-label" for="inp-login"><span>Телефон</span></label>
-											</div>
-											<div class="b-modal-item">
-												<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-												<label class="b-modal-label" for="inp-login"><span>Почта</span></label>
-											</div>									
-										</div>
-										<div class="b-modal-item">
-											<input class="b-modal-input" required id="inp-login" type="text" placeholder="">
-											<label class="b-modal-label" for="inp-login"><span>ФИО</span></label>
-										</div>
-										<div class="b-check">
-											<input type="checkbox" id="h1" name="h" />
-											<label for="h1"><span></span><i>Я прочитал Общие Условия и согласен с условиями</i></label>  
-										</div>	
-										<input class="b-cart-btn" type="submit" value="Оформит заказ">							
-									</form>
-								</div>
-							</div>
+
+{#							<div class="b-cart-form__block b-hidden" id="t3">#}
+{#								<div class="b-cart-form">#}
+
+{#										<div class="b-modal-item">#}
+{#											<input class="b-modal-input" required id="inp-login" type="text" placeholder="">#}
+{#											<label class="b-modal-label" for="inp-login"><span>123ФИО</span></label>#}
+{#										</div>#}
+{#										<div class="b-cart-form__row">#}
+{#											<div class="b-modal-item">#}
+{#												<input class="b-modal-input" required id="inp-login" type="text" placeholder="">#}
+{#												<label class="b-modal-label" for="inp-login"><span>Телефон</span></label>#}
+{#											</div>#}
+{#											<div class="b-modal-item">#}
+{#												<input class="b-modal-input" required id="inp-login" type="text" placeholder="">#}
+{#												<label class="b-modal-label" for="inp-login"><span>Почта</span></label>#}
+{#											</div>									#}
+{#										</div>#}
+{#										<div class="b-modal-item">#}
+{#											<input class="b-modal-input" required id="inp-login" type="text" placeholder="">#}
+{#											<label class="b-modal-label" for="inp-login"><span>ФИО</span></label>#}
+{#										</div>#}
+{#										<div class="b-check">#}
+{#											<input type="checkbox" id="h1" name="h" />#}
+{#											<label for="h1"><span></span><i>Я прочитал Общие Условия и согласен с условиями</i></label>  #}
+{#										</div>	#}
+{#										<input class="b-cart-btn b-cart-btn__confirm" type="submit" value="Оформит заказ">#}
+
+{#								</div>#}
+{#							</div>#}
 							<div class="b-cart-text">
 								<i>Ваш заказ принят, сейчас позвоним вам!</i>
 								<p>Цена товара указана с НДС. Если Вы не латвийская компания , а компания из Евросоюза и являетесь плательщиком НДС, вам будет выслан счет, где цена будет указана без НДС ( 21%). Это относится только к ЮРИДИЧЕСКИМ ЛИЦАМ.</p>
@@ -306,4 +314,57 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	(function ($) {
+		var checkoutProduct = function () {
+			$('.legal__persone .b-cart-btn').on('click', function (e) {
+				e.preventDefault();
+				var value = $('#checkout input[type=\'radio\']:checked, .legal__persone input[type=\'text\'], .legal__persone input[type=\'hidden\'], .legal__persone input[type=\'checkbox\']:checked, .legal__persone select, .legal__persone textarea')
+				var this_form = $(this).closest('form');
+                var this_method = 'POST';
+                var this_action = "index.php?route=checkout/cart/makeOrder";
+                formHandler(value,this_action,this_method,this_form);
+			});
+
+			$('.nat__persone .b-cart-btn').on('click', function (e) {
+				e.preventDefault();
+				var value = $('#checkout input[type=\'radio\']:checked, .nat__persone input[type=\'text\'], .nat__persone input[type=\'hidden\'], .nat__persone input[type=\'checkbox\']:checked, .nat__persone select, .nat__persone textarea')
+				var this_form = $(this).closest('form');
+				var this_method = 'POST';
+				var this_action = "index.php?route=checkout/cart/makeOrder";
+				formHandler(value,this_action,this_method,this_form);
+			});
+
+		};
+
+		$(document).ready(function () {
+			checkoutProduct();
+		});
+	})(jQuery)
+	function formHandler(values,action, method,form){
+		return $.ajax({
+			url: action,
+			type: method,
+			data: values,
+			success: function (response) {
+				console.log(response)
+				if(response.error){
+					$('.alert-danger').remove();
+				    var errors = '';
+				    $(response.error).each(function(index,element){
+				        errors += '<span style="display: block; margin-bottom:5px;">'+element+'</span>';
+                    });
+				    $('.tab-content').after('<div class="alert alert-danger">'+errors+'</div>');
+                }else{
+                    $('.alert-danger').remove();
+					$('.b-cart-text').hide().fadeIn(500);
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				//alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	}
+</script>
 {{ footer }} 

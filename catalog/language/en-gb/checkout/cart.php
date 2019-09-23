@@ -6,7 +6,6 @@ $_['heading_title']            = 'Shopping Cart';
 $_['text_success']             = 'Success: You have added <a href="%s">%s</a> to your <a href="%s">shopping cart</a>!';
 $_['text_remove']              = 'Success: You have modified your shopping cart!';
 $_['text_login']               = 'Attention: You must <a href="%s">login</a> or <a href="%s">create an account</a> to view prices!';
-$_['text_items']               = '%s item(s) - %s';
 $_['text_points']              = 'Reward Points: %s';
 $_['text_next']                = 'What would you like to do next?';
 $_['text_next_choice']         = 'Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.';
@@ -39,3 +38,12 @@ $_['error_minimum']            = 'Minimum order amount for %s is %s!';
 $_['error_required']           = '%s required!';
 $_['error_product']            = 'Warning: There are no products in your cart!';
 $_['error_recurring_required'] = 'Please select a payment recurring!';
+
+/**
+ *  мои настройки
+ */
+$_['text_items']       							= '%s';
+$_['text_curr']       							= '%s';
+$_['cart_title'] = 'Cart';
+$_['cart_empty'] = 'Your cart is empty';
+$_['go_back'] = 'Go back';

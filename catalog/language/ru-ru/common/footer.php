@@ -21,3 +21,14 @@ $_['text_order']        = 'История заказа';
 $_['text_wishlist']     = 'Закладки';
 $_['text_newsletter']   = 'Рассылка';
 $_['text_powered']      = 'Работает на <a target="_blank" href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s';
+
+/*
+* =================== мои настройки
+*/
+$_['text_contact']  = 'Контакты';
+$_['feedback_menu']  = 'Обратная связь';
+$_['site_map_menu']  = 'Карта сайта';
+$_['payment_menu']  = 'Оплата';
+$_['delivery_menu']  = 'Доставка';
+$_['general_terms_menu']  = 'Общие условия';
+$_['about_menu']  = 'О нас';

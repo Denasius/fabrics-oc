@@ -183,4 +183,5 @@ class ControllerStartupSeoUrl extends Controller {
 			return $link;
 		}
 	}
+	
 }

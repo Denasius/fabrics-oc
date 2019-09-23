@@ -48,7 +48,7 @@ $_['entry_address']                  = 'Address';
 $_['entry_geocode']                  = 'Geocode';
 $_['entry_email']                    = 'E-Mail';
 $_['entry_telephone']                = 'Telephone';
-$_['entry_fax']                      = 'Fax';
+
 $_['entry_image']                    = 'Image';
 $_['entry_open']                     = 'Opening Times';
 $_['entry_comment']                  = 'Comment';
@@ -213,3 +213,27 @@ $_['error_log_required']             = 'Error Log Filename required!';
 $_['error_log_invalid']              = 'Error Log Filename invalid!';
 $_['error_log_extension']            = 'Error Log Filename extension needs to be .log!';
 $_['error_encryption']               = 'Encryption Key must be between 32 and 1024 characters!';
+
+/**
+ * ======================= Мои настройки
+ * 
+ */
+
+$_['entry_fax']                      = 'Additional phone';
+$_['category_title']                   = 'Category title';
+$_['social_1_title']                   = 'Social icon 1';
+$_['social_2_title']                   = 'Social icon 2';
+$_['social_3_title']                   = 'Social icon 3';
+$_['social_4_title']                   = 'Social icon 4';
+$_['social_5_title']                   = 'Social icon 5';
+
+$_['social_1_link']                   = 'Social link 1';
+$_['social_2_link']                   = 'Social link 2';
+$_['social_3_link']                   = 'Social link 3';
+$_['social_4_link']                   = 'Social link 4';
+$_['social_5_link']                   = 'Social link 5';
+
+$_['tab_suppliers']                   = 'Suppliers';
+$_['supplier_1']                   = 'Supplier 1';
+$_['supplier_2']                   = 'Supplier 2';
+$_['supplier_3']                   = 'Supplier 3';

@@ -322,6 +322,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-weight-class">{{ entry_weight_class }}</label>
                 <div class="col-sm-10">
+                
                   <select name="weight_class_id" id="input-weight-class" class="form-control">
                     
 
@@ -542,8 +543,8 @@
                             {% if product_option.required %}
 
                             
-                            <option value="1" selected="selected">{{ text_yes }}</option>
-                            <option value="0">{{ text_no }}</option>
+                            <option value="1">{{ text_yes }}</option>
+                            <option value="0" selected="selected">{{ text_no }}</option>
                             
 
                             {% else %}

@@ -55,6 +55,38 @@ class ControllerAccountOrder extends Controller {
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
+			//$reorder = $this->url->link('account/order/reorder', 'order_id=' . $result['order_id'] . '&order_product_id=' . $result['order_id'], true);
+			// $products = $this->model_account_order->getOrderProducts($result['order_id']);
+			// //$reorder = $this->url->link('account/order/reorder', 'order_id=' . $order_id . '&order_product_id=' . $product['order_product_id'], true);
+			// $data['reorder_id'] = array();
+			// $data['reorders'] = '';
+			// foreach( $products as $product ) {
+			// 	$data['reorder_id'][] = array(
+			// 		'order_product_id' => $product['product_id']
+			// 	);
+			// }
+			// foreach($data['reorder_id'] as $reorder){
+			// 	if ($reorder != end($data['reorder_id'])) {
+					
+			// 		$data['reorders'] .= implode($reorder) . ',';
+			// 	}else{
+			// 		$data['reorders'] .= implode($reorder);
+			// 	}
+			// }
+		
+			$this->load->model('account/order');
+			$order_info = $this->model_account_order->getOrder($result['order_id']);
+
+			if ($order_info) {
+				$this->document->setTitle($this->language->get('text_order'));
+
+				// Products
+				$this->load->model('catalog/product');
+				$this->load->model('tool/upload');
+				$data['products'] = array();
+				$products = $this->model_account_order->getOrderProducts($result['order_id']);		
+
+			} // end $order_info
 
 			$data['orders'][] = array(
 				'order_id'   => $result['order_id'],
@@ -86,17 +118,86 @@ class ControllerAccountOrder extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		$data['orders_link'] = $this->url->link('account/order');
+		$data['wish_link'] = $this->url->link('account/wishlist');
+
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
 
+	public function infoOrder(){
+		if($this->request->server['REQUEST_METHOD'] == 'GET'){
+
+			$this->load->language('account/order');
+			$this->load->model('tool/image');
+
+			if (isset($_GET['order_id'])) {
+				$order_id = (int)$_GET['order_id'];
+			} else {
+				$order_id = 0;
+			}
+
+
+			if (!$this->customer->isLogged()) {
+				$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, true);
+	
+				$this->response->redirect($this->url->link('account/login', '', true));
+			}
+	
+			$this->load->model('account/order');
+			$order_info = $this->model_account_order->getOrder($order_id);
+
+			if ($order_info) {
+				$this->document->setTitle($this->language->get('text_order'));
+
+				$data['order_id'] = (int)$_GET['order_id'];
+				$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
+
+				// Products
+				$this->load->model('catalog/product');
+				$this->load->model('tool/upload');
+				$data['products'] = array();
+				$products = $this->model_account_order->getOrderProducts($order_id);
+
+				foreach ($products as $product) {
+					$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+
+					if ($product_info) {
+						$reorder = $this->url->link('account/order/reorder', 'order_id=' . $order_id . '&order_product_id=' . $product['order_product_id'], true);
+					} else {
+						$reorder = '';
+					}
+						
+						$data['products'][] = array(
+							'name'     => $product['name'],
+							'model'    => $product['model'],
+							'quantity' => $product['quantity'],
+							//'image' 	=> $this->config->get('config_url') . 'image/' . $product_info['image'],
+							'image'		=> $this->model_tool_image->resize($product_info['image'], 76, 76),
+							'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+							'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+							'reorder'  => $reorder,
+							'product_id' => $product['product_id'],
+							'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
+						);
+				} // endforeach
+			} // end $order_info
+
+			$this->response->setOutput($this->load->view('account/order_info', $data));
+
+		}
+	}
+
 	public function info() {
+		
 		$this->load->language('account/order');
+		
 
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}
+		
 
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/order/info', 'order_id=' . $order_id, true);
@@ -287,7 +388,6 @@ class ControllerAccountOrder extends Controller {
 					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
 				);
 			}
-
 			// Voucher
 			$data['vouchers'] = array();
 
@@ -341,6 +441,7 @@ class ControllerAccountOrder extends Controller {
 			return new Action('error/not_found');
 		}
 	}
+
 
 	public function reorder() {
 		$this->load->language('account/order');

@@ -3,4 +3,8 @@
 // *	@license	GNU General Public License version 3; see LICENSE.txt
 
 // Text
-$_['text_search'] = 'Поиск';
+/**
+ * =============== МОИ НАСТРОЙКИ
+ */
+$_['text_search_btn'] = 'Поиск';
+$_['text_search'] = 'Введите запрос';

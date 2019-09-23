@@ -35,3 +35,12 @@ $_['column_comment']        = 'Comment';
 
 // Error
 $_['error_reorder']         = '%s is not currently available to be reordered.';
+
+/**
+ * мои настройки
+ */
+$_['text_order_history'] = 'Order history';
+$_['text_order_wishlist'] = 'Wishlist';
+$_['text_order_head'] = 'Order';
+$_['text_order_total'] = 'Total price';
+$_['text_order_replace'] = 'Replace order';

@@ -1805,6 +1805,7 @@ textarea{
 }
 .b-cart-text{
 	margin: 25px 0 0 0;
+	display: none;
 }
 .b-cart-text i{
 	display: block;
@@ -2286,4 +2287,22 @@ textarea{
 
 .recomended_icons{
 	width: 20px;
+}
+.tab-content .b-cart-text{
+	display: none;
+}
+
+.b-lang-wrapper img{
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+ .b-contacts-form__row .b-modal-item:last-child{
+	 width: 100%;
+ }
+textarea.b-modal-input{
+	width: 100%;
+	border: none;
+	min-height: 100px;
+	resize: none;
+    border-bottom: 1px solid #000000;
 }

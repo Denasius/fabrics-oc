@@ -13,7 +13,6 @@ $_['text_discount']            = ' or more ';
 $_['text_option']              = 'Available Options';
 $_['text_minimum']             = 'This product has a minimum quantity of %s';
 $_['text_reviews']             = '%s reviews';
-$_['text_write']               = 'Write a review';
 $_['text_login']               = 'Please <a href="%s">login</a> or <a href="%s">register</a> to review';
 $_['text_no_reviews']          = 'There are no reviews for this product.';
 $_['text_note']                = '<span class="text-danger">Note:</span> HTML is not translated!';
@@ -48,3 +47,20 @@ $_['tab_review']               = 'Reviews (%s)';
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';
 $_['error_text']               = 'Warning: Review Text must be between 25 and 1000 characters!';
 $_['error_rating']             = 'Warning: Please select a review rating!';
+
+/**
+ * мои настройки
+ */
+$_['text_write']               = 'Write a review';
+$_['text_loading']               = 'Loading';
+$_['text_related_products']               = 'Similar products and other sizes';
+$_['text_tax_product']               = 'The price is per piece with VAT (21%)';
+$_['text_your_price']               = 'Your price:';
+$_['text_entity_price']               = 'price';
+$_['text_add_to_cart']               = 'Add to cart';
+$_['text_purchase']               = 'To purchase a sample';
+$_['text_discount_before']            = 'From';
+$_['text_discount_after']            = 'to';
+$_['text_total']            = 'Total: ';
+$_['text_product_review']            = 'Product review';
+$_['text_price_from']            = 'Price from';

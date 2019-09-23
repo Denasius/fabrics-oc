@@ -74,9 +74,12 @@ class ControllerInformationContact extends Controller {
 		$data['geocode'] = $this->config->get('config_geocode');
 		$data['geocode_hl'] = $this->config->get('config_language');
 		$data['telephone'] = $this->config->get('config_telephone');
+		$data['telephone_link'] = str_replace(['+', ' ', '-', '(', ')', '_'], '', $this->config->get('config_telephone'));
+		$data['fax_link'] = str_replace(['+', ' ', '-', '(', ')', '_'], '', $this->config->get('config_fax'));
 		$data['fax'] = $this->config->get('config_fax');
 		$data['open'] = nl2br($this->config->get('config_open'));
 		$data['comment'] = $this->config->get('config_comment');
+		$data['conf_email'] = $this->config->get('config_email');
 
 		$data['locations'] = array();
 
@@ -193,5 +196,47 @@ class ControllerInformationContact extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 
 		$this->response->setOutput($this->load->view('common/success', $data));
+	}
+
+	public function sendform(){
+		if($this->request->server['REQUEST_METHOD'] == 'POST'){
+			$this->load->language('information/contact');
+			$json = array();
+			if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
+				$json['error'][] = $this->language->get('error_name');
+			}
+			if ((utf8_strlen($this->request->post['phone']) < 8) || (utf8_strlen($this->request->post['phone']) > 25)) {
+				$json['error'][] = $this->language->get('error_phone');
+			}
+			if ((utf8_strlen($this->request->post['enquiry']) < 5) || (utf8_strlen($this->request->post['enquiry']) > 1000)) {
+				$json['error'][] = $this->language->get('error_text');
+			}
+			if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
+				$json['error'][] = $this->language->get('error_email');
+			}
+			
+			if (!isset($json['error'])) {
+				$mail = new Mail($this->config->get('config_mail_engine'));
+				$mail->parameter = $this->config->get('config_mail_parameter');
+				$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+				$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+				$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+				$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+				$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+	
+				$mail->setTo($this->config->get('config_email'));
+				$mail->setFrom($this->config->get('config_email'));
+				$mail->setReplyTo($this->request->post['email']);
+				$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
+				$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
+				$mail->setText($this->request->post['enquiry']);
+				$mail->send();			
+				
+				$json['success'] = $this->language->get('text_success');
+			}
+
+			$this->response->addHeader('Content-Type: application/json');
+			$this->response->setOutput(json_encode($json));
+		}
 	}
 }

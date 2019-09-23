@@ -94,7 +94,8 @@ class ControllerAccountAccount extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 		
-		$this->response->setOutput($this->load->view('account/account', $data));
+		// $this->response->setOutput($this->load->view('account/account', $data));
+		$this->response->redirect($this->url->link('account/order', '', true));
 	}
 
 	public function country() {

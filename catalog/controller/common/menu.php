@@ -36,10 +36,20 @@ class ControllerCommonMenu extends Controller {
 					'name'     => $category['name'],
 					'children' => $children_data,
 					'column'   => $category['column'] ? $category['column'] : 1,
-					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
+					'href'     => $this->url->link('catalog/category', 'path=' . $category['category_id'])
 				);
 			}
 		}
+
+		$data['contact_link'] = $this->url->link('information/contact');
+		// Доставка
+		$data['delivery_link'] = $this->url->link('information/information', 'information_id=3');
+		// О нас
+		$data['about_link'] = $this->url->link('information/information', 'information_id=4');
+		// Оплата
+		$data['payment_link'] = $this->url->link('information/information', 'information_id=5');
+		// Производство
+		$data['production_link'] = $this->url->link('blog/category', 'blog_category_id=78');
 
 		return $this->load->view('common/menu', $data);
 	}
